@@ -13,11 +13,27 @@
 #   See the License for the specific language governing permissions and
 #   limitations under the License.
 #
-
 import unittest
 
 from thunderhead.connection import Connection
+from thunderhead.exceptions import MissingProperty
 
 
-def test_build_url():
-    connection = Connection(port=8443, protocol="https",)
+class ConnectionTests(unittest.TestCase):
+
+    def test_build_url_throws_missing_property(self):
+        connection = Connection(port=8443, protocol="https")
+        self.assertRaises(MissingProperty, connection.build_url)
+
+    def test_build_url_strips_ending_slashes_from_command(self):
+        host = "localhost"
+        port = 8443
+        command = "customers/"
+        connection = Connection(host=host, port=port, command=command)
+        path = connection.base_path
+        proto = connection.protocol
+        url = "{0}://{1}:{2}/{3}/customers".format(proto, host, port, path)
+        self.assertEqual(url, connection.build_url())
+
+if __name__ == '__main__':
+    unittest.main()

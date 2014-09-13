@@ -13,6 +13,7 @@
 #   See the License for the specific language governing permissions and
 #   limitations under the License.
 #
+from .exceptions import MissingProperty
 
 
 class Connection:
@@ -23,11 +24,41 @@ class Connection:
             self.port = kwargs.get("port")
         self.host = kwargs.get("host")
         self.header_key = "x-usagemeter-authorization"
-        self.path = "/um/api/"
+        self.base_path = "/um/api/"
         self.protocol = "https"
         if kwargs.get("protocol"):
             self.protocol = kwargs.get("protocol")
+        self.command_path = kwargs.get("command")
 
     def build_url(self):
-        return "{0}://{1}:{2}/{3}".format(self.protocol, self.host, self.port,
-                                          self.path)
+        """
+        Builds a valid URL for use in connecting to vCloud Usage Meter
+
+        :rtype : str
+        """
+        self._check_required_url_properties()
+        self._strip_command_slashes()
+        return "{0}://{1}:{2}/{3}/{4}".format(
+            self.protocol,
+            self.host,
+            self.port,
+            self.base_path,
+            self.command_path
+        )
+
+    def _strip_command_slashes(self):
+        """
+        Removes any trailing slashes from the command path
+        """
+        if self.command_path.endswith("/"):
+            self.command_path = self.command_path[:-1]
+
+    def _check_required_url_properties(self):
+        """
+        Verifies that all required properties are set before calling
+        the build_url method
+        """
+        if not self.host:
+            raise MissingProperty('host')
+        if not self.command_path:
+            raise MissingProperty('command_path')
