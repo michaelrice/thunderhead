@@ -13,15 +13,53 @@
 #   See the License for the specific language governing permissions and
 #   limitations under the License.
 
-from distutils.core import setup
+import os
+from setuptools import setup
+
+
+def read(fname):
+    return open(os.path.join(os.path.dirname(__file__), fname)).read()
+
+with open('requirements.txt') as f:
+    required = f.read().splitlines()
+
+with open('test-requirements.txt') as f:
+    required_for_tests = f.read().splitlines()
 
 setup(
     name='thunderhead',
-    version='0.1',
-    packages=['tests', 'thunderhead'],
+    version='0.1-DEVELOPMENT',
+    description='Python sdk to interface with vCloud Usage Meter',
+    long_description=read('README.rst'),
+    packages=['thunderhead'],
     url='https://github.com/michaelrice/thunderhead',
-    license='Apache 2.0',
+    install_requires=required,
+    license='License :: OSI Approved :: Apache Software License',
+    classifiers=[
+        'Development Status :: 5 - Production/Stable',
+        'License :: OSI Approved :: Apache Software License',
+        'Intended Audience :: Information Technology',
+        'Intended Audience :: System Administrators',
+        'Intended Audience :: Developers',
+        'Environment :: No Input/Output (Daemon)',
+        'Programming Language :: Python :: 2',
+        'Programming Language :: Python :: 2.6',
+        'Programming Language :: Python :: 2.7',
+        'Programming Language :: Python :: 3',
+        'Programming Language :: Python :: 3.2',
+        'Programming Language :: Python :: 3.3',
+        'Programming Language :: Python :: 3.4',
+        'Topic :: Software Development :: Libraries :: Python Modules',
+        'Topic :: System :: Distributed Computing',
+        'Operating System :: Microsoft :: Windows',
+        'Operating System :: POSIX',
+        'Operating System :: Unix',
+        'Operating System :: MacOS',
+    ],
+    platforms=['Windows', 'Linux', 'Solaris', 'Mac OS-X', 'Unix'],
     author='Michael Rice',
     author_email='michael@michaelrice.org',
-    description='bindings for vCloud Usage Meter'
+    test_suite='tests',
+    zip_safe=True,
+    tests_require=required_for_tests,
 )
