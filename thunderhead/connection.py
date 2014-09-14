@@ -1,4 +1,3 @@
-#
 # Copyright 2014 Michael Rice <michael@michaelrice.org>
 #
 #   Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,7 +11,7 @@
 #   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 #   See the License for the specific language governing permissions and
 #   limitations under the License.
-#
+
 from .exceptions import MissingProperty
 
 
@@ -24,11 +23,12 @@ class Connection:
             self.port = kwargs.get("port")
         self.host = kwargs.get("host")
         self.header_key = "x-usagemeter-authorization"
-        self.base_path = "/um/api/"
+        self.base_path = "um/api"
         self.protocol = "https"
         if kwargs.get("protocol"):
             self.protocol = kwargs.get("protocol")
         self.command_path = kwargs.get("command")
+        self.verify_ssl = kwargs.get('verify_ssl')
 
     def build_url(self):
         """

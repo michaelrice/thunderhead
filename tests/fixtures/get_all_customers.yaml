@@ -1,0 +1,31 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      User-Agent: [python-requests/2.4.1 CPython/2.7.8 Darwin/13.3.0]
+      x-usagemeter-authorization: [TOKSDVLMROYMFIYEDBLHXDHLPIV5IDYGHM2]
+    method: GET
+    uri: https://vusagemeter:8443/um/api/customers
+  response:
+    body: {string: !!python/unicode "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<customers><customer>\n
+        \   <id>1</id>\n    <name>1018700</name>\n    <country>United States</country>\n
+        \   <postalCode>78232</postalCode>\n    </customer><customer>\n    <id>3</id>\n
+        \   <name>123456</name>\n    <country>United States</country>\n    <postalCode>78232</postalCode>\n
+        \   </customer><customer>\n    <id>2</id>\n    <name>862323</name>\n    <country>United
+        States</country>\n    <postalCode>78232</postalCode>\n    </customer></customers>
+        \ \n  "}
+    headers:
+      cache-control: ['no-cache, private, no-store']
+      content-length: ['479']
+      content-type: [text/xml;charset=utf-8]
+      date: ['Sun, 14 Sep 2014 19:53:16 GMT']
+      expires: ['Sat, 13 Sep 2014 01:10:42 GMT']
+      pragma: [no-cache]
+      server: [Apache-Coyote/1.1]
+      set-cookie: [JSESSIONID=325EE87F790DD87748A93DE9B66CB0E9; Path=/um/; Secure]
+      x-lift-version: ['2.5']
+    status: {code: 200, message: OK}
+version: 1

@@ -12,4 +12,25 @@
 #   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 #   See the License for the specific language governing permissions and
 #   limitations under the License.
-#
+
+import logging
+import os
+import unittest
+
+ADMIN_TOKEN = "TOKSDVLMROYMFIYEDBLHXDHLPIV5IDYGHM2"
+USER_TOKEN = "TOKFWZWF5TO34NUREN5KETI2B1KESAC3HRZ"
+
+
+def tests_resource_path(local_path=''):
+    this_file = os.path.dirname(os.path.abspath(__file__))
+    return os.path.join(this_file, local_path)
+
+# Full path to the fixtures directory underneath this module
+fixtures_path = tests_resource_path(local_path='fixtures')
+
+
+class VCRBasedTests(unittest.TestCase):
+    def setUp(self):
+        logging.basicConfig()
+        vcr_log = logging.getLogger('vcr')
+        vcr_log.setLevel(logging.DEBUG)

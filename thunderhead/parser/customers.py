@@ -1,4 +1,3 @@
-#
 # Copyright 2014 Michael Rice <michael@michaelrice.org>
 #
 #   Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,4 +11,49 @@
 #   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 #   See the License for the specific language governing permissions and
 #   limitations under the License.
-#
+
+from lxml import etree
+
+
+class Customer(object):
+    def __init__(self):
+        self.customer_id = None
+        self.name = None
+        self.country = None
+        self.postal_code = None
+
+
+def parse_all_customers(body):
+    if body is None:
+        return None
+    customers = etree.fromstring(body)
+    if len(customers) == 0:
+        return None
+    customer_list = []
+    for customer in customers.getchildren():
+        customer_dict = _parse_customer(customer)
+        customer_list.append(customer_dict)
+    return customer_list
+
+
+def parse_customer(body):
+    if body is None:
+        return None
+    customer = etree.fromstring(body)
+    return _parse_customer(customer)
+
+
+def _parse_customer(customer):
+    c = Customer()
+    for customer_info in customer:
+        tag = customer_info.tag
+        text = customer_info.text
+        if tag == 'id':
+            c.customer_id = text
+        if tag == 'postalCode':
+            c.postal_code = text
+        if tag == 'name':
+            c.name = text
+        if tag == 'country':
+            c.country = text
+    return c.__dict__
