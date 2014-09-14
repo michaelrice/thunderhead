@@ -15,7 +15,12 @@
 
 import logging
 import os
-import unittest
+import sys
+
+if sys.version_info < (2, 7):
+    import unittest2 as unittest
+else:
+    import unittest
 
 ADMIN_TOKEN = "TOKSDVLMROYMFIYEDBLHXDHLPIV5IDYGHM2"
 USER_TOKEN = "TOKFWZWF5TO34NUREN5KETI2B1KESAC3HRZ"
