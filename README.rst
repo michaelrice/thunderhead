@@ -1,5 +1,5 @@
-.. image:: https://travis-ci.org/michaelrice/thunderbolt.svg
-    :target: https://travis-ci.org/michaelrice/thunderbolt
+.. image:: https://travis-ci.org/michaelrice/thunderhead.svg
+    :target: https://travis-ci.org/michaelrice/thunderhead
     :alt: Build Status
 
 thunderhead is the Python SDK for the vCloud Usage Meter API that allows you to
