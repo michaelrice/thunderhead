@@ -1,0 +1,29 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      User-Agent: [python-requests/2.4.1 CPython/2.7.8 Darwin/13.3.0]
+      x-usagemeter-authorization: [TOKSDVLMROYMFIYEDBLHXDHLPIV5IDYGHM2]
+    method: GET
+    uri: https://vusagemeter:8443/um/api/vcenters
+  response:
+    body: {string: !!python/unicode "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<vcServers><vcServer
+        xmlns=\"http://www.vmware.com/UM\" xmlns:tns=\"http://www.vmware.com/UM\"
+        xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"><id>1</id><hostname>172.16.214.129</hostname><username>root</username><instanceUuid>137E2125-73EB-4E1B-BF03-2B6CD396E6AC</instanceUuid><fullname>VMware
+        vCenter Server 5.5.0 build-1945287 (Sim)</fullname><active>true</active><version>5.5.0</version><meter>true</meter><monitor>false</monitor></vcServer></vcServers>
+        \ \n  "}
+    headers:
+      cache-control: ['no-cache, private, no-store']
+      content-length: ['547']
+      content-type: [text/xml;charset=utf-8]
+      date: ['Mon, 15 Sep 2014 18:18:48 GMT']
+      expires: ['Mon, 15 Sep 2014 14:22:29 GMT']
+      pragma: [no-cache]
+      server: [Apache-Coyote/1.1]
+      set-cookie: [JSESSIONID=D0EF404F20680CB00FA8509354923C20; Path=/um/; Secure]
+      x-lift-version: ['2.5']
+    status: {code: 200, message: OK}
+version: 1

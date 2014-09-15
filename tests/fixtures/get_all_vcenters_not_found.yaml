@@ -1,0 +1,25 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      User-Agent: [python-requests/2.4.1 CPython/2.7.8 Darwin/13.3.0]
+      x-usagemeter-authorization: [TOKSDVLMROYMFIYEDBLHXDHLPIV5IDYGHM2]
+    method: GET
+    uri: https://vusagemeter:8443/um/api/vcenters
+  response:
+    body: {string: !!python/unicode ''}
+    headers:
+      cache-control: ['no-cache, private, no-store']
+      content-length: ['547']
+      content-type: [text/xml;charset=utf-8]
+      date: ['Mon, 15 Sep 2014 18:18:48 GMT']
+      expires: ['Mon, 15 Sep 2014 14:22:29 GMT']
+      pragma: [no-cache]
+      server: [Apache-Coyote/1.1]
+      set-cookie: [JSESSIONID=D0EF404F20680CB00FA8509354923C20; Path=/um/; Secure]
+      x-lift-version: ['2.5']
+    status: {code: 404, message: Not Found}
+version: 1
