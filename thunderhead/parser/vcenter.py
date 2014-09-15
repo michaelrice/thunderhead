@@ -12,7 +12,6 @@
 #   See the License for the specific language governing permissions and
 #   limitations under the License.
 
-import re
 from xml.etree import ElementTree as etree
 
 
@@ -20,7 +19,6 @@ def parse_all_vcenters(body):
     if body is None:
         return None
     # this is messy but it seems cleaner than dealing with the namespace
-    body = re.sub(' xmlns="[^"]+"', '', body, count=1)
     vcenters = etree.fromstring(body)
     if len(vcenters) == 0:
         return None
@@ -34,8 +32,6 @@ def parse_all_vcenters(body):
 def parse_vcenter(body):
     if body is None:
         return None
-    # this is messy but it seems cleaner than dealing with the namespace
-    body = re.sub(' xmlns="[^"]+"', '', body, count=1)
     vcenter = etree.fromstring(body)
     # lame. the extra <vcserver> tag seems pointless here..
     for vc in vcenter.getchildren():
@@ -45,7 +41,8 @@ def parse_vcenter(body):
 def _parse_vcenter(vcenter):
     v = {}
     for vcenter_info in vcenter.getchildren():
-        tag = vcenter_info.tag
+        # this is messy but it seems cleaner than dealing with the namespace
+        tag = vcenter_info.tag.split("}")[1][0:]
         text = vcenter_info.text
         v[tag] = text
     return v
