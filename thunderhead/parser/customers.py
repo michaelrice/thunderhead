@@ -12,7 +12,7 @@
 #   See the License for the specific language governing permissions and
 #   limitations under the License.
 
-from lxml import etree
+from xml.etree import ElementTree as etree
 
 
 class Customer(object):
