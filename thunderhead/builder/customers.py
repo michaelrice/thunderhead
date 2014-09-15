@@ -68,8 +68,10 @@ def get_customer_rules(connection, customer_id):
     url = connection.build_url()
     verify_ssl = connection.verify_ssl
     res = requests.get(url=url, headers=extra_headers, verify=verify_ssl)
+    if res.status_code > 210:
+        return
     body = res.content
-    pass
+    return customers.parse_customer_rules(body)
 
 
 def _build_customer_payload(customer):

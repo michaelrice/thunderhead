@@ -57,6 +57,7 @@ class CustomerTests(tests.VCRBasedTests):
     @vcr.use_cassette('create_new_customer.yaml',
                       cassette_library_dir=tests.fixtures_path,
                       record_mode='once')
+    # TODO: fix this once we find out why api gives a 404
     def no_test_create_new_customer(self):
         connection = Connection(host='vusagemeter',
                                 token=tests.ADMIN_TOKEN,
@@ -78,3 +79,14 @@ class CustomerTests(tests.VCRBasedTests):
                                 )
         deleted_customer = customers.delete_customer(connection, 1)
         self.assertEquals(deleted_customer, True)
+
+    @vcr.use_cassette('get_customer_rules.yaml',
+                      cassette_library_dir=tests.fixtures_path,
+                      record_mode='once')
+    # TODO: fix this once we find out why the api returns nothing
+    def no_test_get_customer_rules(self):
+        connection = Connection(host='vusagemeter',
+                                token=tests.ADMIN_TOKEN,
+                                )
+        rules = customers.get_customer_rules(connection, 2)
+        self.assertEquals(rules, list)

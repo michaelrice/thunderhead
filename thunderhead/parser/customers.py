@@ -43,6 +43,11 @@ def parse_customer(body):
     return _parse_customer(customer)
 
 
+# TODO: fix this once we know why api returns nothing
+def parse_customer_rules(body):
+    pass
+
+
 def _parse_customer(customer):
     c = Customer()
     for customer_info in customer:
