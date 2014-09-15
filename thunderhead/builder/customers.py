@@ -12,6 +12,10 @@
 #   See the License for the specific language governing permissions and
 #   limitations under the License.
 
+from xml.etree.ElementTree import Element
+from xml.etree.ElementTree import SubElement
+from xml.etree.ElementTree import tostring
+
 import requests
 
 from thunderhead.parser import customers
@@ -28,6 +32,8 @@ def get_all_customers(connection):
     url = connection.build_url()
     verify_ssl = connection.verify_ssl
     res = requests.get(url=url, headers=extra_headers, verify=verify_ssl)
+    if res.status_code > 210:
+        return
     body = res.content
     return customers.parse_all_customers(body)
 
@@ -45,6 +51,8 @@ def get_customer(connection, customer_id):
     verify_ssl = connection.verify_ssl
     res = requests.get(url=url, headers=extra_headers, verify=verify_ssl)
     body = res.content
+    if res.status_code > 210:
+        return
     return customers.parse_customer(body)
 
 
@@ -64,16 +72,53 @@ def get_customer_rules(connection, customer_id):
     pass
 
 
+def _build_customer_payload(customer):
+    """
+    <customer xmlns="http://www.vmware.com/UM">
+        <name>Customer Name</name>
+        <country>US</country>
+        <postalCode>90210</postalCode>
+    </customer>
+    """
+    attribs = {
+        'xmlns': 'http://www.vmware.com/UM'
+    }
+    root = Element('customer', attribs)
+    name = SubElement(root, 'name')
+    name.text = str(customer['name'])
+    country = SubElement(root, 'country')
+    country.text = customer['country']
+    postal = SubElement(root, 'postalCode')
+    postal.text = str(customer['postal_code'])
+    return tostring(root)
+
+
 def create_customer(connection, customer):
     """
     Creates a customer
 
+    The customer param should be a dict like:
+    {
+        'name': 123456,
+        'country': 'US',
+        'postal_code': 78232
+    }
+
+    :param connection:
     :param customer:
     :return:
     """
     connection.command_path = "customer"
-    req_type = 'POST'
-    pass
+    extra_headers = {connection.header_key: connection.token}
+    url = connection.build_url()
+    verify_ssl = connection.verify_ssl
+    customer_data = _build_customer_payload(customer)
+    res = requests.post(url, headers=extra_headers,
+                        data=customer_data,
+                        verify=verify_ssl)
+    if res.status_code > 210:
+        return
+    return customers.parse_customer(res.content)
 
 
 def update_customer(connection, customer_id, customer):
@@ -97,5 +142,10 @@ def delete_customer(connection, customer_id):
     :return:
     """
     connection.command_path = 'customer/{0}'.format(customer_id)
-    req_type = 'DELETE'
-    pass
+    extra_headers = {connection.header_key: connection.token}
+    url = connection.build_url()
+    verify_ssl = connection.verify_ssl
+    res = requests.delete(url, headers=extra_headers, verify=verify_ssl)
+    if res.status_code == 204:
+        return True
+    return False

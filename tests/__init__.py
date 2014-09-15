@@ -1,4 +1,3 @@
-#
 # Copyright 2014 Michael Rice <michael@michaelrice.org>
 #
 #   Licensed under the Apache License, Version 2.0 (the "License");

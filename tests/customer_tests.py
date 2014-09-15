@@ -43,3 +43,38 @@ class CustomerTests(tests.VCRBasedTests):
         c1_dict = {'country': 'United States', 'customer_id': '1',
                    'postal_code': '78232', 'name': '1018700'}
         self.assertDictEqual(usage_customer, c1_dict)
+
+    @vcr.use_cassette('get_customer_not_found.yaml',
+                      cassette_library_dir=tests.fixtures_path,
+                      record_mode='none')
+    def test_get_single_customer_not_found(self):
+        connection = Connection(host='vusagemeter',
+                                token=tests.ADMIN_TOKEN,
+                                )
+        useage_customer = customers.get_customer(connection, 1000000)
+        self.assertIsNone(useage_customer)
+
+    @vcr.use_cassette('create_new_customer.yaml',
+                      cassette_library_dir=tests.fixtures_path,
+                      record_mode='once')
+    def no_test_create_new_customer(self):
+        connection = Connection(host='vusagemeter',
+                                token=tests.ADMIN_TOKEN,
+                                )
+        customer_info = {
+            'name': 5551212,
+            'country': 'US',
+            'postal_code': 79762
+        }
+        new_customer = customers.create_customer(connection, customer_info)
+        self.assertDictContainsSubset(customer_info, new_customer)
+
+    @vcr.use_cassette('delete_customer.yaml',
+                      cassette_library_dir=tests.fixtures_path,
+                      record_mode='none')
+    def test_delete_customer(self):
+        connection = Connection(host='vusagemeter',
+                                token=tests.ADMIN_TOKEN,
+                                )
+        deleted_customer = customers.delete_customer(connection, 1)
+        self.assertEquals(deleted_customer, True)
