@@ -33,6 +33,10 @@ def tests_resource_path(local_path=''):
 fixtures_path = tests_resource_path(local_path='fixtures')
 
 
+class ThunderheadTests(unittest.TestCase):
+    pass
+
+
 class VCRBasedTests(unittest.TestCase):
     def setUp(self):
         logging.basicConfig()

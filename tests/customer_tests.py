@@ -51,8 +51,8 @@ class CustomerTests(tests.VCRBasedTests):
         connection = Connection(host='vusagemeter',
                                 token=tests.ADMIN_TOKEN,
                                 )
-        useage_customer = customers.get_customer(connection, 1000000)
-        self.assertIsNone(useage_customer)
+        usage_customer = customers.get_customer(connection, 1000000)
+        self.assertIsNone(usage_customer)
 
     @vcr.use_cassette('create_new_customer.yaml',
                       cassette_library_dir=tests.fixtures_path,

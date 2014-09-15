@@ -1,4 +1,3 @@
-#
 # Copyright 2014 Michael Rice <michael@michaelrice.org>
 #
 #   Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,14 +11,13 @@
 #   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 #   See the License for the specific language governing permissions and
 #   limitations under the License.
-#
-import unittest
 
+import tests
 from thunderhead.connection import Connection
 from thunderhead.exceptions import MissingProperty
 
 
-class ConnectionTests(unittest.TestCase):
+class ConnectionTests(tests.ThunderheadTests):
 
     def test_build_url_throws_missing_property(self):
         connection = Connection(port=8443, protocol="https")
@@ -34,6 +32,3 @@ class ConnectionTests(unittest.TestCase):
         proto = connection.protocol
         url = "{0}://{1}:{2}/{3}/customers".format(proto, host, port, path)
         self.assertEqual(url, connection.build_url())
-
-if __name__ == '__main__':
-    unittest.main()
