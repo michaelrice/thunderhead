@@ -21,8 +21,12 @@ if sys.version_info < (2, 7):
 else:
     import unittest
 
+from thunderhead.connection import Connection
+
 ADMIN_TOKEN = "TOKSDVLMROYMFIYEDBLHXDHLPIV5IDYGHM2"
 USER_TOKEN = "TOKFWZWF5TO34NUREN5KETI2B1KESAC3HRZ"
+CONNECTION = Connection(host='vusagemeter',
+                        token=ADMIN_TOKEN)
 
 
 def tests_resource_path(local_path=''):

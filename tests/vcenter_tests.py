@@ -15,7 +15,6 @@
 import vcr
 
 import tests
-from thunderhead.connection import Connection
 from thunderhead.builder import vcenter
 
 
@@ -25,20 +24,14 @@ class VcenterTests(tests.VCRBasedTests):
                       cassette_library_dir=tests.fixtures_path,
                       record_mode='none')
     def test_get_all_vcenters_not_found(self):
-        connection = Connection(host='vusagemeter',
-                                token=tests.ADMIN_TOKEN,
-                                )
-        vcenters = vcenter.get_all_vcenters(connection)
+        vcenters = vcenter.get_all_vcenters(tests.CONNECTION)
         self.assertIsNone(vcenters)
 
     @vcr.use_cassette('get_all_vcenters.yaml',
                       cassette_library_dir=tests.fixtures_path,
                       record_mode='none')
     def test_get_all_vcenters(self):
-        connection = Connection(host='vusagemeter',
-                                token=tests.ADMIN_TOKEN,
-                                )
-        vcenters = vcenter.get_all_vcenters(connection)
+        vcenters = vcenter.get_all_vcenters(tests.CONNECTION)
         self.assertIsNotNone(vcenters)
         self.assertIsInstance(vcenters, list)
         d1 = {
@@ -58,10 +51,7 @@ class VcenterTests(tests.VCRBasedTests):
                       cassette_library_dir=tests.fixtures_path,
                       record_mode='once')
     def test_get_vcenter_by_id_found(self):
-        connection = Connection(host='vusagemeter',
-                                token=tests.ADMIN_TOKEN,
-                                )
-        vc = vcenter.get_vcenter(connection, 1)
+        vc = vcenter.get_vcenter(tests.CONNECTION, 1)
         d1 = {
             'username': 'root',
             'instanceUuid': '137E2125-73EB-4E1B-BF03-2B6CD396E6AC',
@@ -81,10 +71,7 @@ class VcenterTests(tests.VCRBasedTests):
                       cassette_library_dir=tests.fixtures_path,
                       record_mode='once')
     def test_get_vcenter_by_id_not_found(self):
-        connection = Connection(host='vusagemeter',
-                                token=tests.ADMIN_TOKEN,
-                                )
-        vc = vcenter.get_vcenter(connection, 1000)
+        vc = vcenter.get_vcenter(tests.CONNECTION, 1000)
         self.assertIsNone(vc)
 
     # TODO: come back to fix when bug addressed.
@@ -92,16 +79,13 @@ class VcenterTests(tests.VCRBasedTests):
                       cassette_library_dir=tests.fixtures_path,
                       record_mode='once')
     def no_test_create_vcenter(self):
-        connection = Connection(host='vusagemeter',
-                                token=tests.ADMIN_TOKEN,
-                                )
         vc_info = {
             'hostname': '172.16.214.131',
             'username': 'root',
             'password': 'vmware',
             'monitor': 'true'
         }
-        vc = vcenter.create_vcenter(connection, vc_info)
+        vc = vcenter.create_vcenter(tests.CONNECTION, vc_info)
         self.assertDictContainsSubset(vc_info, vc)
 
     #def test_update_vcenter(self):
