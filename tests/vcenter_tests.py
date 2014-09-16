@@ -87,11 +87,25 @@ class VcenterTests(tests.VCRBasedTests):
         vc = vcenter.get_vcenter(connection, 1000)
         self.assertIsNone(vc)
 
-    def test_create_vcenter(self):
-        pass
+    # TODO: come back to fix when bug addressed.
+    @vcr.use_cassette('create_vcenter.yaml',
+                      cassette_library_dir=tests.fixtures_path,
+                      record_mode='once')
+    def no_test_create_vcenter(self):
+        connection = Connection(host='vusagemeter',
+                                token=tests.ADMIN_TOKEN,
+                                )
+        vc_info = {
+            'hostname': '172.16.214.131',
+            'username': 'root',
+            'password': 'vmware',
+            'monitor': 'true'
+        }
+        vc = vcenter.create_vcenter(connection, vc_info)
+        self.assertDictContainsSubset(vc_info, vc)
 
-    def test_update_vcenter(self):
-        pass
+    #def test_update_vcenter(self):
+    #    pass
 
-    def test_delete_vcenter(self):
-        pass
+    #def test_delete_vcenter(self):
+    #    pass

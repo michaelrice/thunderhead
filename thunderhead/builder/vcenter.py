@@ -40,14 +40,28 @@ def get_all_vcenters(connection):
 
 def create_vcenter(connection, vcenter):
     """
+    vcenter should be a dict that looks like:
 
+    {
+        'hostname': '10.2.3.4',
+        'username': 'root',
+        'password': 'my password',
+        'monitor': 'true'
+    }
     :param connection:
     :return:
     """
-    connection.command_path = "customers"
+    connection.command_path = "vcenter"
     extra_headers = {connection.header_key: connection.token}
     url = connection.build_url()
     verify_ssl = connection.verify_ssl
+    vcenter_data = _build_vcenter(vcenter)
+    res = requests.post(url, headers=extra_headers,
+                        data=vcenter_data,
+                        verify=verify_ssl)
+    if res.status_code > 210:
+        return
+    return vcenter.parse_vcenter(res.content)
 
 
 def get_vcenter(connection, vcenter_id):
@@ -88,4 +102,16 @@ def _build_vcenter(vcenter_info):
     :param vcenter_info:
     :return:
     """
-    pass
+    attribs = {
+        'xmlns': 'http://www.vmware.com/UM'
+    }
+    root = Element('vcServer', attribs)
+    host = SubElement(root, 'hostname')
+    host.text = str(vcenter_info['hostname'])
+    username = SubElement(root, 'username')
+    username.text = str(vcenter_info['username'])
+    password = SubElement(root, 'password')
+    password.text = str(vcenter_info['password'])
+    monitor = SubElement(root, 'monitor')
+    monitor.text = str(vcenter_info['monitor'])
+    return tostring(root)
