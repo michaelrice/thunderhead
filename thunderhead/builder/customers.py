@@ -111,7 +111,10 @@ def create_customer(connection, customer):
     :return:
     """
     connection.command_path = "customer"
-    extra_headers = {connection.header_key: connection.token}
+    extra_headers = {
+        connection.header_key: connection.token,
+        'Content-Type': 'text/xml'
+    }
     url = connection.build_url()
     verify_ssl = connection.verify_ssl
     customer_data = _build_customer_payload(customer)

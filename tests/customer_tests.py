@@ -48,13 +48,15 @@ class CustomerTests(tests.VCRBasedTests):
                       cassette_library_dir=tests.fixtures_path,
                       record_mode='once')
     # TODO: fix this once we find out why api gives a 404
-    def no_test_create_new_customer(self):
+    def test_create_new_customer(self):
         customer_info = {
-            'name': 5551212,
+            'name': '15551212',
             'country': 'US',
-            'postal_code': 79762
+            'postal_code': '79762'
         }
         new_customer = customers.create_customer(tests.CONNECTION, customer_info)
+        # the api returns country name but expcets country code
+        customer_info['country'] = 'United States'
         self.assertDictContainsSubset(customer_info, new_customer)
 
     @vcr.use_cassette('delete_customer.yaml',

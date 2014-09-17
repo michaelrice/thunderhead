@@ -1,33 +1,29 @@
 interactions:
 - request:
-    body: <customer xmlns="http://www.vmware.com/UM"><name>5551212</name><country>US</country><postalCode>79762</postalCode></customer>
+    body: <customer xmlns="http://www.vmware.com/UM"><name>15551212</name><country>US</country><postalCode>79762</postalCode></customer>
     headers:
       Accept: ['*/*']
       Accept-Encoding: ['gzip, deflate']
       Connection: [keep-alive]
-      Content-Length: ['125']
+      Content-Length: ['126']
+      Content-Type: [text/xml]
       User-Agent: [python-requests/2.4.1 CPython/2.7.8 Darwin/13.3.0]
       x-usagemeter-authorization: [TOKSDVLMROYMFIYEDBLHXDHLPIV5IDYGHM2]
     method: POST
     uri: https://vusagemeter:8443/um/api/customer
   response:
-    body: {string: !!python/unicode '<html><head><title>VMware vFabric tc Runtime
-        - Error report</title><style><!--H1 {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;font-size:22px;}
-        H2 {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;font-size:16px;}
-        H3 {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;font-size:14px;}
-        BODY {font-family:Tahoma,Arial,sans-serif;color:black;background-color:white;}
-        B {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;}
-        P {font-family:Tahoma,Arial,sans-serif;background:white;color:black;font-size:12px;}A
-        {color : black;}A.name {color : black;}HR {color : #525D76;}--></style> </head><body><h1>HTTP
-        Status 404 - /um/api/customer</h1><HR size="1" noshade="noshade"><p><b>type</b>
-        Status report</p><p><b>message</b> <u>/um/api/customer</u></p><p><b>description</b>
-        <u>The requested resource is not available.</u></p><HR size="1" noshade="noshade"><h3>VMware
-        vFabric tc Runtime</h3></body></html>'}
+    body: {string: !!python/unicode "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<customer>\n
+        \   <id>7</id>\n    <name>15551212</name>\n    <country>United States</country>\n
+        \   <postalCode>79762</postalCode>\n    </customer>  \n  "}
     headers:
-      content-length: ['991']
-      content-type: [text/html;charset=utf-8]
-      date: ['Mon, 15 Sep 2014 02:25:22 GMT']
+      cache-control: ['no-cache, private, no-store']
+      content-length: ['183']
+      content-type: [text/xml;charset=utf-8]
+      date: ['Wed, 17 Sep 2014 05:09:20 GMT']
+      expires: ['Tue, 16 Sep 2014 13:58:13 GMT']
+      pragma: [no-cache]
       server: [Apache-Coyote/1.1]
-      set-cookie: [JSESSIONID=499DA31F34DCCB7FD0B2798F048A5716; Path=/um/; Secure]
-    status: {code: 404, message: Not Found}
+      set-cookie: [JSESSIONID=DF1FCE6BA425CC3A0D74064FFDC484D8; Path=/um/; Secure]
+      x-lift-version: ['2.5']
+    status: {code: 201, message: Created}
 version: 1
