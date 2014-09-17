@@ -38,7 +38,7 @@ def get_all_vcenters(connection):
     return vcenter.parse_all_vcenters(body)
 
 
-def create_vcenter(connection, vcenter):
+def create_vcenter(connection, vcenter_obj):
     """
     vcenter should be a dict that looks like:
 
@@ -52,10 +52,13 @@ def create_vcenter(connection, vcenter):
     :return:
     """
     connection.command_path = "vcenter"
-    extra_headers = {connection.header_key: connection.token}
+    extra_headers = {
+        connection.header_key: connection.token,
+        'Content-Type': 'text/xml'
+    }
     url = connection.build_url()
     verify_ssl = connection.verify_ssl
-    vcenter_data = _build_vcenter(vcenter)
+    vcenter_data = _build_vcenter(vcenter_obj)
     res = requests.post(url, headers=extra_headers,
                         data=vcenter_data,
                         verify=verify_ssl)
