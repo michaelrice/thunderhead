@@ -19,7 +19,7 @@ from thunderhead.builder import customers
 
 
 class CustomerTests(tests.VCRBasedTests):
-
+    # Test get all customers.
     @vcr.use_cassette('get_all_customers.yaml',
                       cassette_library_dir=tests.fixtures_path,
                       record_mode='none')
@@ -28,6 +28,7 @@ class CustomerTests(tests.VCRBasedTests):
         self.assertEquals(isinstance(usage_customers, list), True)
         self.assertEquals(len(usage_customers), 3)
 
+    # Test get customer by ID
     @vcr.use_cassette('get_customer.yaml',
                       cassette_library_dir=tests.fixtures_path,
                       record_mode='none')
@@ -37,6 +38,7 @@ class CustomerTests(tests.VCRBasedTests):
                    'postal_code': '78232', 'name': '1018700'}
         self.assertDictEqual(usage_customer, c1_dict)
 
+    # Test customer not found
     @vcr.use_cassette('get_customer_not_found.yaml',
                       cassette_library_dir=tests.fixtures_path,
                       record_mode='none')
@@ -44,10 +46,10 @@ class CustomerTests(tests.VCRBasedTests):
         usage_customer = customers.get_customer(tests.CONNECTION, 1000000)
         self.assertIsNone(usage_customer)
 
+    # Test create new customer
     @vcr.use_cassette('create_new_customer.yaml',
                       cassette_library_dir=tests.fixtures_path,
                       record_mode='once')
-    # TODO: fix this once we find out why api gives a 404
     def test_create_new_customer(self):
         customer_info = {
             'name': '15551212',
@@ -58,6 +60,22 @@ class CustomerTests(tests.VCRBasedTests):
         # the api returns country name but expcets country code
         customer_info['country'] = 'United States'
         self.assertDictContainsSubset(customer_info, new_customer)
+
+    # Test Create new customer but duplicate found in system.
+    @vcr.use_cassette('create_new_customer_duplicate_bad_request.yaml',
+                      cassette_library_dir=tests.fixtures_path,
+                      record_mode='once')
+    def test_create_new_customer_duplicate_found(self):
+        customer_info = {
+            'name': '5551212',
+            'country': 'US',
+            'postal_code': '79762'
+        }
+        with self.assertRaises(customers.DuplicateCustomerException):
+            foo = customers.create_customer(
+                tests.CONNECTION,
+                customer_info
+            )
 
     @vcr.use_cassette('delete_customer.yaml',
                       cassette_library_dir=tests.fixtures_path,

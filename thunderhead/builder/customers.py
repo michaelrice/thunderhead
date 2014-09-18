@@ -69,7 +69,7 @@ def get_customer_rules(connection, customer_id):
     verify_ssl = connection.verify_ssl
     res = requests.get(url=url, headers=extra_headers, verify=verify_ssl)
     if res.status_code > 210:
-        return
+        raise CustomerNotFoundException(res.content)
     body = res.content
     return customers.parse_customer_rules(body)
 
@@ -121,9 +121,12 @@ def create_customer(connection, customer):
     res = requests.post(url, headers=extra_headers,
                         data=customer_data,
                         verify=verify_ssl)
-    if res.status_code > 210:
-        return
-    return customers.parse_customer(res.content)
+    if res.status_code == 400 and res.content == 'The Customer name must be unique.':
+        raise DuplicateCustomerException(res.content)
+    elif res.status_code == 201:
+        return customers.parse_customer(res.content)
+    else:
+        raise UnExpectedCustomerException(res.content)
 
 
 def update_customer(connection, customer_id, customer):
@@ -134,6 +137,7 @@ def update_customer(connection, customer_id, customer):
     :param customer:
     :return:
     """
+    #TODO implement me!
     connection.command_path = "customer/{0}".format(customer_id)
     req_type = 'PUT'
     pass
@@ -153,4 +157,20 @@ def delete_customer(connection, customer_id):
     res = requests.delete(url, headers=extra_headers, verify=verify_ssl)
     if res.status_code == 204:
         return True
-    return False
+    raise CustomerDeletionException(res.content)
+
+
+class DuplicateCustomerException(Exception):
+    pass
+
+
+class CustomerNotFoundException(Exception):
+    pass
+
+
+class UnExpectedCustomerException(Exception):
+    pass
+
+
+class CustomerDeletionException(Exception):
+    pass

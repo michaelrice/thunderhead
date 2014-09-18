@@ -1,0 +1,28 @@
+interactions:
+- request:
+    body: <customer xmlns="http://www.vmware.com/UM"><name>5551212</name><country>US</country><postalCode>79762</postalCode></customer>
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      Content-Length: ['125']
+      Content-Type: [text/xml]
+      User-Agent: [python-requests/2.4.1 CPython/2.7.8 Darwin/13.3.0]
+      x-usagemeter-authorization: [TOKSDVLMROYMFIYEDBLHXDHLPIV5IDYGHM2]
+    method: POST
+    uri: https://vusagemeter:8443/um/api/customer
+  response:
+    body: {string: !!python/unicode The Customer name must be unique.}
+    headers:
+      cache-control: ['no-cache, private, no-store']
+      connection: [close]
+      content-length: ['33']
+      content-type: [text/plain;charset=utf-8]
+      date: ['Wed, 17 Sep 2014 03:55:34 GMT']
+      expires: ['Tue, 16 Sep 2014 13:58:13 GMT']
+      pragma: [no-cache]
+      server: [Apache-Coyote/1.1]
+      set-cookie: [JSESSIONID=97F783360FF8900B3687C241F947C0B5; Path=/um/; Secure]
+      x-lift-version: ['2.5']
+    status: {code: 400, message: Bad Request}
+version: 1
