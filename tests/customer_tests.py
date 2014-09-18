@@ -72,7 +72,7 @@ class CustomerTests(tests.VCRBasedTests):
             'postal_code': '79762'
         }
         with self.assertRaises(customers.DuplicateCustomerException):
-            foo = customers.create_customer(
+            customers.create_customer(
                 tests.CONNECTION,
                 customer_info
             )

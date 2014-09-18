@@ -28,9 +28,8 @@ def get_all_rules(connection):
     verify_ssl = connection.verify_ssl
     res = requests.get(url=url, headers=extra_headers, verify=verify_ssl)
     if res.status_code > 210:
-        return
-    body = res.content
-    return rules.parse_all_rules(body)
+        raise RuleNotFoundException(res.content)
+    return rules.parse_all_rules(res.content)
 
 
 def get_rule(connection, rule_id):
@@ -40,8 +39,14 @@ def get_rule(connection, rule_id):
     verify_ssl = connection.verify_ssl
     res = requests.get(url=url, headers=extra_headers, verify=verify_ssl)
     if res.status_code > 210:
-        return
-    body = res.content
-    return rules.parse_rule(body)
+        raise RuleNotFoundException(res.content)
+    return rules.parse_rule(res.content)
 
+
+def create_rule(connection, rule_info):
+    pass
+
+
+class RuleNotFoundException(Exception):
+    pass
 

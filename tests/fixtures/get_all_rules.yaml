@@ -1,0 +1,29 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      User-Agent: [python-requests/2.4.1 CPython/2.7.8 Darwin/13.3.0]
+      x-usagemeter-authorization: [TOKSDVLMROYMFIYEDBLHXDHLPIV5IDYGHM2]
+    method: GET
+    uri: https://vusagemeter:8443/um/api/rules
+  response:
+    body: {string: !!python/unicode "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<rules><rule
+        xmlns=\"http://www.vmware.com/UM\" xmlns:tns=\"http://www.vmware.com/UM\"
+        xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"><id>2</id><vcServerId>1</vcServerId><customerId>3</customerId><objectType>Data
+        Center</objectType><valueType>Unique ID</valueType><value>datacenter-2</value></rule></rules>
+        \ \n  "}
+    headers:
+      cache-control: ['no-cache, private, no-store']
+      content-length: ['397']
+      content-type: [text/xml;charset=utf-8]
+      date: ['Wed, 17 Sep 2014 02:29:33 GMT']
+      expires: ['Tue, 16 Sep 2014 13:58:13 GMT']
+      pragma: [no-cache]
+      server: [Apache-Coyote/1.1]
+      set-cookie: [JSESSIONID=EFB2818D2E8F5D710F749E21F1E9A028; Path=/um/; Secure]
+      x-lift-version: ['2.5']
+    status: {code: 200, message: OK}
+version: 1

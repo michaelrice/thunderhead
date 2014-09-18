@@ -25,7 +25,6 @@ def parse_all_rules(body):
     for rule in rules.getchildren():
         rule_dict = _parse_rule(rule)
         rule_list.append(rule_dict)
-    print rule_list
     return rule_list
 
 
