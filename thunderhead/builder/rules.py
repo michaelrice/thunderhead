@@ -21,7 +21,25 @@ import requests
 from thunderhead.parser import rules
 
 
+class RuleNotFoundException(Exception):
+    pass
+
+
+class RuleDeletionException(Exception):
+    pass
+
+
+class RuleCreationException(Exception):
+    pass
+
+
 def get_all_rules(connection):
+    """
+    Get All Rules from vCloud Usage Meter
+
+    :param connection:
+    :return:
+    """
     connection.command_path = "rules"
     extra_headers = {connection.header_key: connection.token}
     url = connection.build_url()
@@ -33,6 +51,13 @@ def get_all_rules(connection):
 
 
 def get_rule(connection, rule_id):
+    """
+    Get a specific rule based on its id.
+
+    :param connection:
+    :param rule_id:
+    :return:
+    """
     connection.command_path = "rule/{0}".format(rule_id)
     extra_headers = {connection.header_key: connection.token}
     url = connection.build_url()
@@ -44,9 +69,95 @@ def get_rule(connection, rule_id):
 
 
 def create_rule(connection, rule_info):
+    """
+    Create a new rule.
+
+    rule_info = {
+        'vcServer': '10.255.79.10',
+        'customerName':'company23-A',
+        'objectType':'VM',
+        'valueType':'Unique ID',
+        'value':'vm-10'
+    }
+
+    :param connection:
+    :param rule_info:
+    :return:
+    """
+    connection.command_path = 'rule'
+    extra_headers = {
+        connection.header_key: connection.token,
+        'Content-Type': 'text/xml'
+    }
+    url = connection.build_url()
+    rule_data = _build_rule_payload(rule_info)
+    verify_ssl = connection.verify_ssl
+    res = requests.post(url, headers=extra_headers,
+                        data=rule_data,
+                        verify=verify_ssl)
+    if res.status_code == 201:
+        return rules.parse_rule(res.content)
+    raise RuleCreationException("Error creating rule: {0} => {0}".format(
+        res.status_code, res.content
+    ))
+
+
+def update_rule(connection, rule_info):
     pass
 
 
-class RuleNotFoundException(Exception):
-    pass
+def delete_rule(connection, rule_id):
+    """
+    Delete a given rule from vCloud Usage Meter based on its id
 
+    :param connection:
+    :param rule_id:
+    :return:
+    """
+    connection.command_path = 'rule/{0}'.format(rule_id)
+    url = connection.build_url()
+    verify_ssl = connection.verify_ssl
+    extra_headers = {connection.header_key: connection.token}
+    res = requests.delete(url, headers=extra_headers, verify=verify_ssl)
+    if res.status_code != 204:
+        raise RuleDeletionException("Error: {0} => {1}".format(
+            res.status_code, res.content))
+    return True
+
+
+def _build_rule_payload(rule_info):
+    """
+    rule_info = {
+        'vcServer': '10.255.79.10',
+        'customerName':'company23-A',
+        'objectType':'VM',
+        'valueType':'Unique ID',
+        'value':'vm-10'
+    }
+
+    <rule xmlns="http://www.vmware.com/UM">
+        <vcServerId>10.255.79.10</vcServerId>
+        <customerName>company23-A</customerName>
+        <objectType>VM</objectType>
+        <valueType>Unique ID</valueType>
+        <value>vm-10</value>
+    </rule>
+
+    :param rule_info:
+    :return:
+    """
+    attribs = {
+        'xmlns': 'http://www.vmware.com/UM'
+    }
+    root = Element('rule', attribs)
+    customer = SubElement(root, 'customerName')
+    customer.text = str(rule_info['customerName'])
+    object_type = SubElement(root, 'objectType')
+    object_type.text = str(rule_info['objectType'])
+    value_type = SubElement(root, 'valueType')
+    value_type.text = str(rule_info['valueType'])
+    value = SubElement(root, 'value')
+    value.text = str(rule_info['value'])
+    vcenter = SubElement(root, 'vcServerId')
+    vcenter.text = str(rule_info['vcServerId'])
+    return tostring(root)

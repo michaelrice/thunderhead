@@ -60,21 +60,35 @@ class RulesTest(tests.ThunderheadTests):
                       record_mode='once')
     def test_get_rule_by_id_not_found(self):
         rule_id = 10000
-        rule = rules.get_rule(tests.CONNECTION, rule_id)
-        self.assertIsNone(rule)
+        with self.assertRaises(rules.RuleNotFoundException):
+            rules.get_rule(tests.CONNECTION, rule_id)
+
+    @vcr.use_cassette('delete_rule_by_id_not_found.yaml',
+                      cassette_library_dir=tests.fixtures_path,
+                      record_mode='once')
+    def test_delete_rule_by_id_not_found(self):
+        rule_id = 1
+        deleted = rules.delete_rule(tests.CONNECTION, rule_id)
+        self.assertTrue(deleted)
 
     @vcr.use_cassette('delete_rule_by_id.yaml',
                       cassette_library_dir=tests.fixtures_path,
                       record_mode='once')
     def test_delete_rule_by_id(self):
-        rule_id = 1
-        deleted = rules.delete_rule(rule_id)
+        rule_id = 2
+        deleted = rules.delete_rule(tests.CONNECTION, rule_id)
         self.assertTrue(deleted)
 
     @vcr.use_cassette('create_new_rule.yaml',
                       cassette_library_dir=tests.fixtures_path,
                       record_mode='once')
-    def test_create_new_rule(self):
-        rule_info = {}
+    def no_test_create_new_rule(self):
+        rule_info = {
+            'vcServerId': '1',
+            'customerName': '1018700',
+            'objectType': 'Data Center',
+            'valueType': 'Unique ID',
+            'value': 'datacenter-104'
+        }
         rule = rules.create_rule(tests.CONNECTION, rule_info)
         self.assertIsNotNone(rule)
