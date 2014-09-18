@@ -121,7 +121,7 @@ def create_customer(connection, customer):
     res = requests.post(url, headers=extra_headers,
                         data=customer_data,
                         verify=verify_ssl)
-    if res.status_code == 400 and res.content == 'The Customer name must be unique.':
+    if res.status_code == 400 and str(res.content) == 'The Customer name must be unique.':
         raise DuplicateCustomerException(res.content)
     elif res.status_code == 201:
         return customers.parse_customer(res.content)
