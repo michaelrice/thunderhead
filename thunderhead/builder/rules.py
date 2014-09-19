@@ -143,6 +143,17 @@ def _build_rule_payload(rule_info):
         <value>vm-10</value>
     </rule>
 
+    From schema from VMware:
+    <xs:complexType name="NewRule">
+      <xs:sequence>
+        <xs:element name="vcServerHost" type="xs:string" minOccurs="0"/>
+        <xs:element name="customerName" type="xs:string"/>
+        <xs:element name="objectType" type="objectType"/>
+        <xs:element name="valueType" type="valueType"/>
+        <xs:element name="value" type="xs:string" minOccurs="0"/>
+      </xs:sequence>
+    </xs:complexType>
+
     :param rule_info:
     :return:
     """
@@ -150,6 +161,8 @@ def _build_rule_payload(rule_info):
         'xmlns': 'http://www.vmware.com/UM'
     }
     root = Element('rule', attribs)
+    vcenter = SubElement(root, 'vcServerHost')
+    vcenter.text = str(rule_info['vcServerHost'])
     customer = SubElement(root, 'customerName')
     customer.text = str(rule_info['customerName'])
     object_type = SubElement(root, 'objectType')
@@ -158,6 +171,4 @@ def _build_rule_payload(rule_info):
     value_type.text = str(rule_info['valueType'])
     value = SubElement(root, 'value')
     value.text = str(rule_info['value'])
-    vcenter = SubElement(root, 'vcServerId')
-    vcenter.text = str(rule_info['vcServerId'])
     return tostring(root)

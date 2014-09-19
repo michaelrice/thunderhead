@@ -79,12 +79,26 @@ class RulesTest(tests.ThunderheadTests):
         deleted = rules.delete_rule(tests.CONNECTION, rule_id)
         self.assertTrue(deleted)
 
+    @vcr.use_cassette('create_new_rule_fail_no_customer.yaml',
+                      cassette_library_dir=tests.fixtures_path,
+                      record_mode='once')
+    def test_create_new_rule_fail_no_customer(self):
+        rule_info = {
+            'vcServerHost': '172.16.214.129',
+            'customerName': '1018700',
+            'objectType': 'Data Center',
+            'valueType': 'Unique ID',
+            'value': 'datacenter-104'
+        }
+        with self.assertRaises(rules.RuleCreationException):
+            rules.create_rule(tests.CONNECTION, rule_info)
+
     @vcr.use_cassette('create_new_rule.yaml',
                       cassette_library_dir=tests.fixtures_path,
                       record_mode='once')
-    def no_test_create_new_rule(self):
+    def test_create_new_rule(self):
         rule_info = {
-            'vcServerId': '1',
+            'vcServerHost': '172.16.214.129',
             'customerName': '1018700',
             'objectType': 'Data Center',
             'valueType': 'Unique ID',
