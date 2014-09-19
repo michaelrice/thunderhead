@@ -1,0 +1,27 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      User-Agent: [python-requests/2.4.1 CPython/2.7.8 Darwin/13.3.0]
+      x-usagemeter-authorization: [TOKSDVLMROYMFIYEDBLHXDHLPIV5IDYGHM2]
+    method: GET
+    uri: https://vusagemeter:8443/um/api/report/1?dateTo=20140918&dateFrom=2014091200
+  response:
+    body: {string: !!python/unicode dateFrom and dateTo are required and must be in
+        the form yyyymmddhh}
+    headers:
+      cache-control: ['no-cache, private, no-store']
+      connection: [close]
+      content-length: ['67']
+      content-type: [text/plain;charset=utf-8]
+      date: ['Fri, 19 Sep 2014 00:29:21 GMT']
+      expires: ['Fri, 19 Sep 2014 00:10:40 GMT']
+      pragma: [no-cache]
+      server: [Apache-Coyote/1.1]
+      set-cookie: [JSESSIONID=14ADEE18570D262CDC26FDCEE130CBC6; Path=/um/; Secure]
+      x-lift-version: ['2.5']
+    status: {code: 400, message: Bad Request}
+version: 1
