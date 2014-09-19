@@ -1,0 +1,26 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      User-Agent: [python-requests/2.4.1 CPython/2.7.8 Darwin/13.3.0]
+      x-usagemeter-authorization: [TOKSDVLMROYMFIYEDBLHXDHLPIV5IDYGHM2]
+    method: GET
+    uri: https://vusagemeter:8443/um/api/customer/2/rules
+  response:
+    body: {string: !!python/unicode "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<rules></rules>
+        \ \n  "}
+    headers:
+      cache-control: ['no-cache, private, no-store']
+      content-length: ['59']
+      content-type: [text/xml;charset=utf-8]
+      date: ['Mon, 15 Sep 2014 04:58:22 GMT']
+      expires: ['Sat, 13 Sep 2014 01:10:42 GMT']
+      pragma: [no-cache]
+      server: [Apache-Coyote/1.1]
+      set-cookie: [JSESSIONID=FF52DAA85D582D82621BF7EC73DF0DDD; Path=/um/; Secure]
+      x-lift-version: ['2.5']
+    status: {code: 200, message: OK}
+version: 1

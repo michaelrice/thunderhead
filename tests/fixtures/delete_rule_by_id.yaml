@@ -1,0 +1,24 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      Content-Length: ['0']
+      User-Agent: [python-requests/2.4.1 CPython/2.7.8 Darwin/13.3.0]
+      x-usagemeter-authorization: [TOKSDVLMROYMFIYEDBLHXDHLPIV5IDYGHM2]
+    method: DELETE
+    uri: https://vusagemeter:8443/um/api/rule/2
+  response:
+    body: {string: !!python/unicode ''}
+    headers:
+      cache-control: ['no-cache, private, no-store']
+      date: ['Thu, 18 Sep 2014 04:30:31 GMT']
+      expires: ['Wed, 17 Sep 2014 21:39:51 GMT']
+      pragma: [no-cache]
+      server: [Apache-Coyote/1.1]
+      set-cookie: [JSESSIONID=77ED6DA9CB4811524CB77F29CC2D3FA9; Path=/um/; Secure]
+      x-lift-version: ['2.5']
+    status: {code: 204, message: No Content}
+version: 1

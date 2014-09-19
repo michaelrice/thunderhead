@@ -1,0 +1,32 @@
+interactions:
+- request:
+    body: <rule xmlns="http://www.vmware.com/UM"><customerName>1018700</customerName><objectType>Data
+      Center</objectType><valueType>Unique ID</valueType><value>datacenter-104</value><vcServerId>1</vcServerId></rule>
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      Content-Length: ['205']
+      Content-Type: [text/xml]
+      User-Agent: [python-requests/2.4.1 CPython/2.7.8 Darwin/13.3.0]
+      x-usagemeter-authorization: [TOKSDVLMROYMFIYEDBLHXDHLPIV5IDYGHM2]
+    method: POST
+    uri: https://vusagemeter:8443/um/api/rule
+  response:
+    body: {string: !!python/unicode "scalaxb.ParserFailure: Error while parsing <rule
+        xmlns=\"http://www.vmware.com/UM\"><customerName>1018700</customerName><objectType>Data
+        Center</objectType><valueType>Unique ID</valueType><value>datacenter-104</value><vcServerId>1</vcServerId></rule>:
+        parser error \"end of input expected\" while parsing /{http://www.vmware.com/UM}rule/{http://www.vmware.com/UM}customerName{http://www.vmware.com/UM}objectType{http://www.vmware.com/UM}valueType{http://www.vmware.com/UM}value{http://www.vmware.com/UM}vcServerId\n
+        \   ^"}
+    headers:
+      cache-control: ['no-cache, private, no-store']
+      content-length: ['515']
+      content-type: [text/plain;charset=utf-8]
+      date: ['Thu, 18 Sep 2014 03:57:37 GMT']
+      expires: ['Wed, 17 Sep 2014 21:39:51 GMT']
+      pragma: [no-cache]
+      server: [Apache-Coyote/1.1]
+      set-cookie: [JSESSIONID=84025346A78E2CEEB014BE422068237B; Path=/um/; Secure]
+      x-lift-version: ['2.5']
+    status: {code: 403, message: Forbidden}
+version: 1

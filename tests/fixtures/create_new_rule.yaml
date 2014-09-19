@@ -1,0 +1,32 @@
+interactions:
+- request:
+    body: <rule xmlns="http://www.vmware.com/UM"><vcServerHost>172.16.214.129</vcServerHost><customerName>1018700</customerName><objectType>Data
+      Center</objectType><valueType>Unique ID</valueType><value>datacenter-104</value></rule>
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      Content-Length: ['222']
+      Content-Type: [text/xml]
+      User-Agent: [python-requests/2.4.1 CPython/2.7.8 Darwin/13.3.0]
+      x-usagemeter-authorization: [TOKSDVLMROYMFIYEDBLHXDHLPIV5IDYGHM2]
+    method: POST
+    uri: https://vusagemeter:8443/um/api/rule
+  response:
+    body: {string: !!python/unicode "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<rule
+        xmlns=\"http://www.vmware.com/UM\" xmlns:tns=\"http://www.vmware.com/UM\"
+        xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"><id>3</id><vcServerId>1</vcServerId><customerId>8</customerId><objectType>Data
+        Center</objectType><valueType>Unique ID</valueType><value>datacenter-104</value></rule>
+        \ \n  "}
+    headers:
+      cache-control: ['no-cache, private, no-store']
+      content-length: ['384']
+      content-type: [text/xml;charset=utf-8]
+      date: ['Fri, 19 Sep 2014 00:52:11 GMT']
+      expires: ['Fri, 19 Sep 2014 00:10:40 GMT']
+      pragma: [no-cache]
+      server: [Apache-Coyote/1.1]
+      set-cookie: [JSESSIONID=5564F6BCB2951421CDB91810287C9941; Path=/um/; Secure]
+      x-lift-version: ['2.5']
+    status: {code: 201, message: Created}
+version: 1

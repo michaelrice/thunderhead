@@ -1,0 +1,34 @@
+interactions:
+- request:
+    body: <rule xmlns="http://www.vmware.com/UM"><vcServer>172.16.214.129</vcServer><customerName>1018700</customerName><objectType>Data
+      Center</objectType><valueType>Unique ID</valueType><value>datacenter-104</value></rule>
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      Content-Length: ['214']
+      Content-Type: [text/xml]
+      User-Agent: [python-requests/2.4.1 CPython/2.7.8 Darwin/13.3.0]
+      x-usagemeter-authorization: [TOKSDVLMROYMFIYEDBLHXDHLPIV5IDYGHM2]
+    method: POST
+    uri: https://vusagemeter:8443/um/api/rule
+  response:
+    body: {string: !!python/unicode 'scalaxb.ParserFailure: Error while parsing <rule
+        xmlns="http://www.vmware.com/UM"><vcServer>172.16.214.129</vcServer><customerName>1018700</customerName><objectType>Data
+        Center</objectType><valueType>Unique ID</valueType><value>datacenter-104</value></rule>:
+        parser error "`{http://www.vmware.com/UM}customerName'' expected but {http://www.vmware.com/UM}vcServer
+        found" while parsing /{http://www.vmware.com/UM}rule/{http://www.vmware.com/UM}vcServer{http://www.vmware.com/UM}customerName{http://www.vmware.com/UM}objectType{http://www.vmware.com/UM}valueType{http://www.vmware.com/UM}value
+
+        ^'}
+    headers:
+      cache-control: ['no-cache, private, no-store']
+      content-length: ['591']
+      content-type: [text/plain;charset=utf-8]
+      date: ['Thu, 18 Sep 2014 03:43:17 GMT']
+      expires: ['Wed, 17 Sep 2014 21:39:51 GMT']
+      pragma: [no-cache]
+      server: [Apache-Coyote/1.1]
+      set-cookie: [JSESSIONID=F411CCF305E06DA030AD29B4641F7878; Path=/um/; Secure]
+      x-lift-version: ['2.5']
+    status: {code: 403, message: Forbidden}
+version: 1
