@@ -1,0 +1,35 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      User-Agent: [python-requests/2.4.1 CPython/2.7.8 Darwin/13.3.0]
+      x-usagemeter-authorization: [TOKSDVLMROYMFIYEDBLHXDHLPIV5IDYGHM2]
+    method: GET
+    uri: https://vusagemeter:8443/um/api/reports
+  response:
+    body: {string: !!python/unicode "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<reports>\n
+        \     <report>\n      <link method=\"get\" rel=\"Monthly Usage Units\" href=\"/api/report/5\"
+        />\n    </report><report>\n      <link method=\"get\" rel=\"Virtual Machines
+        by Product Server\" href=\"/api/report/19\" />\n    </report><report>\n      <link
+        method=\"get\" rel=\"Bundles\" href=\"/api/report/17\" />\n    </report><report>\n
+        \     <link method=\"get\" rel=\"Customer Summary\" href=\"/api/report/3\"
+        />\n    </report><report>\n      <link method=\"get\" rel=\"Detailed Billing\"
+        href=\"/api/report/1\" />\n    </report><report>\n      <link method=\"get\"
+        rel=\"Detailed Usage\" href=\"/api/report/2\" />\n    </report><report>\n
+        \     <link method=\"get\" rel=\"License Summary\" href=\"/api/report/4\"
+        />\n    </report>\n    </reports>  \n  "}
+    headers:
+      cache-control: ['no-cache, private, no-store']
+      content-length: ['744']
+      content-type: [text/xml;charset=utf-8]
+      date: ['Thu, 18 Sep 2014 14:00:22 GMT']
+      expires: ['Wed, 17 Sep 2014 21:39:51 GMT']
+      pragma: [no-cache]
+      server: [Apache-Coyote/1.1]
+      set-cookie: [JSESSIONID=0BB0DEEB4F62A1E1AA3C1EE2136C4D64; Path=/um/; Secure]
+      x-lift-version: ['2.5']
+    status: {code: 200, message: OK}
+version: 1
