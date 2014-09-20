@@ -24,8 +24,8 @@ class VcenterTests(tests.VCRBasedTests):
                       cassette_library_dir=tests.fixtures_path,
                       record_mode='once')
     def test_get_all_vcenters_not_found(self):
-        vcenters = vcenter.get_all_vcenters(tests.CONNECTION)
-        self.assertIsNone(vcenters)
+        with self.assertRaises(vcenter.VCenterException):
+            vcenter.get_all_vcenters(tests.CONNECTION)
 
     @vcr.use_cassette('get_all_vcenters.yaml',
                       cassette_library_dir=tests.fixtures_path,
@@ -71,8 +71,8 @@ class VcenterTests(tests.VCRBasedTests):
                       cassette_library_dir=tests.fixtures_path,
                       record_mode='once')
     def test_get_vcenter_by_id_not_found(self):
-        vc = vcenter.get_vcenter(tests.CONNECTION, 1000)
-        self.assertIsNone(vc)
+        with self.assertRaises(vcenter.VCenterException):
+            vcenter.get_vcenter(tests.CONNECTION, 1000)
 
     # TODO: come back to fix when bug addressed.
     @vcr.use_cassette('create_vcenter.yaml',
@@ -88,8 +88,14 @@ class VcenterTests(tests.VCRBasedTests):
         vc = vcenter.create_vcenter(tests.CONNECTION, vc_info)
         self.assertIsInstance(vc, dict)
 
-    #def test_update_vcenter(self):
-    #    pass
+    @vcr.use_cassette('delete_vcenter.yaml',
+                      cassette_library_dir=tests.fixtures_path,
+                      record_mode='once')
+    def test_update_vcenter(self):
+        pass
 
-    #def test_delete_vcenter(self):
-    #    pass
+    @vcr.use_cassette('update_vcenter.yaml',
+                      cassette_library_dir=tests.fixtures_path,
+                      record_mode='once')
+    def test_delete_vcenter(self):
+        pass

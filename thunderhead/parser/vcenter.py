@@ -16,6 +16,24 @@ from xml.etree import ElementTree as etree
 
 
 def parse_all_vcenters(body):
+    """
+    Parse the response from a GET /api/vcenters
+    This will return a list of dict where the dict
+    is a representation of the vCenter.
+    ret = [{
+            'username': 'root',
+            'instanceUuid': '137E2125-73EB-4E1B-BF03-2B6CD396E6AC',
+            'monitor': 'false',
+            'hostname': '172.16.214.129',
+            'meter': 'true',
+            'version': '5.5.0',
+            'active': 'true',
+            'fullname': 'VMware vCenter Server 5.5.0 build-1945287 (Sim)',
+            'id': '1'
+    }]
+    :param body:
+    :return list:
+    """
     if body is None:
         return None
     # this is messy but it seems cleaner than dealing with the namespace
@@ -30,6 +48,25 @@ def parse_all_vcenters(body):
 
 
 def parse_vcenter(body):
+    """
+    Parse a single vCenter from GET /api/vcenter/{id}
+    and from a POST /api/vcenter
+    Returns a dict representation of a vCenter
+    ret = {
+            'username': 'root',
+            'instanceUuid': '137E2125-73EB-4E1B-BF03-2B6CD396E6AC',
+            'monitor': 'false',
+            'hostname': '172.16.214.129',
+            'meter': 'true',
+            'version': '5.5.0',
+            'active': 'true',
+            'fullname': 'VMware vCenter Server 5.5.0 build-1945287 (Sim)',
+            'id': '1'
+    }
+
+    :param body:
+    :return dict:
+    """
     if body is None:
         return None
     vcenter = etree.fromstring(body)
