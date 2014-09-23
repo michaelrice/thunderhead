@@ -61,6 +61,18 @@ class CustomerTests(tests.VCRBasedTests):
         customer_info['country'] = 'United States'
         self.assertDictContainsSubset(customer_info, new_customer)
 
+    # Test create new customer
+    @vcr.use_cassette('create_new_customer_no_country_code.yaml',
+                      cassette_library_dir=tests.fixtures_path,
+                      record_mode='once')
+    def test_create_new_customer_no_country_code(self):
+        customer_info = {
+            'name': '15551212',
+            'postal_code': 'Unknown'
+        }
+        with self.assertRaises(customers.MissingProperty):
+            customers.create_customer(tests.CONNECTION, customer_info)
+
     # Test Create new customer but duplicate found in system.
     @vcr.use_cassette('create_new_customer_duplicate_bad_request.yaml',
                       cassette_library_dir=tests.fixtures_path,

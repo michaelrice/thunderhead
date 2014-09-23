@@ -1,0 +1,32 @@
+interactions:
+- request:
+    body: <customer xmlns="http://www.vmware.com/UM"><name>15551212</name><postalCode>Unknown</postalCode></customer>
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      Content-Length: ['107']
+      Content-Type: [text/xml]
+      User-Agent: [python-requests/2.4.1 CPython/2.7.8 Darwin/13.4.0]
+      x-usagemeter-authorization: [TOKSDVLMROYMFIYEDBLHXDHLPIV5IDYGHM2]
+    method: POST
+    uri: https://vusagemeter:8443/um/api/customer
+  response:
+    body: {string: !!python/unicode "scalaxb.ParserFailure: Error while parsing <customer
+        xmlns=\"http://www.vmware.com/UM\"><name>15551212</name><postalCode>Unknown</postalCode></customer>:
+        parser error \"`{http://www.vmware.com/UM}country' expected but {http://www.vmware.com/UM}postalCode
+        found\" while parsing /{http://www.vmware.com/UM}customer/{http://www.vmware.com/UM}name{http://www.vmware.com/UM}postalCode\n
+        ^"}
+    headers:
+      cache-control: ['no-cache, private, no-store']
+      connection: [close]
+      content-length: ['378']
+      content-type: [text/plain;charset=utf-8]
+      date: ['Tue, 23 Sep 2014 06:48:05 GMT']
+      expires: ['Tue, 23 Sep 2014 06:41:58 GMT']
+      pragma: [no-cache]
+      server: [Apache-Coyote/1.1]
+      set-cookie: [JSESSIONID=AD14C55CF309501D2876246042CFC1DD; Path=/um/; Secure]
+      x-lift-version: ['2.5']
+    status: {code: 400, message: Bad Request}
+version: 1
