@@ -1,0 +1,30 @@
+interactions:
+- request:
+    body: <customer xmlns="http://www.vmware.com/UM"><name>15551212111</name><country>United
+      States</country><postalCode>79762</postalCode></customer>
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      Content-Length: ['140']
+      Content-Type: [text/xml]
+      User-Agent: [python-requests/2.4.1 CPython/2.7.8 Darwin/13.4.0]
+      x-usagemeter-authorization: [TOKSDVLMROYMFIYEDBLHXDHLPIV5IDYGHM2]
+    method: POST
+    uri: https://vusagemeter:8443/um/api/customer
+  response:
+    body: {string: !!python/unicode 'United States is not a valid country code. See
+        http://www.iso.org/iso/home/standards/country_codes/.'}
+    headers:
+      cache-control: ['no-cache, private, no-store']
+      connection: [close]
+      content-length: ['100']
+      content-type: [text/plain;charset=utf-8]
+      date: ['Thu, 25 Sep 2014 04:36:12 GMT']
+      expires: ['Thu, 25 Sep 2014 03:49:09 GMT']
+      pragma: [no-cache]
+      server: [Apache-Coyote/1.1]
+      set-cookie: [JSESSIONID=FA0D717C1C01D6DCD7877D086B98BC09; Path=/um/; Secure]
+      x-lift-version: ['2.5']
+    status: {code: 400, message: Bad Request}
+version: 1

@@ -130,6 +130,8 @@ def create_customer(connection, customer):
                         verify=verify_ssl)
     if res.status_code == 400 and res.content == b'The Customer name must be unique.':
         raise DuplicateCustomerException(res.content)
+    elif res.status_code == 400 and b'not a valid country code' in res.content:
+        raise InvalidCountryCodeException(res.content)
     elif res.status_code == 201:
         return customers.parse_customer(res.content)
     else:
@@ -185,3 +187,8 @@ class CustomerDeletionException(Exception):
 
 class MissingProperty(Exception):
     pass
+
+
+class InvalidCountryCodeException(Exception):
+    pass
+
