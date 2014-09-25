@@ -62,6 +62,19 @@ class CustomerTests(tests.VCRBasedTests):
         self.assertDictContainsSubset(customer_info, new_customer)
 
     # Test create new customer
+    @vcr.use_cassette('create_new_customer_using_country_name.yaml',
+                      cassette_library_dir=tests.fixtures_path,
+                      record_mode='once')
+    def test_create_new_customer_using_country_name(self):
+        customer_info = {
+            'name': '15551212111',
+            'country': 'United States',
+            'postal_code': '79762'
+        }
+        with self.assertRaises(customers.InvalidCountryCodeException):
+            customers.create_customer(tests.CONNECTION, customer_info)
+
+    # Test create new customer
     @vcr.use_cassette('create_new_customer_no_country_code.yaml',
                       cassette_library_dir=tests.fixtures_path,
                       record_mode='once')
