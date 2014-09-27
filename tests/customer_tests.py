@@ -116,3 +116,16 @@ class CustomerTests(tests.VCRBasedTests):
     def no_test_get_customer_rules(self):
         rules = customers.get_customer_rules(tests.CONNECTION, 2)
         self.assertEquals(rules, list)
+
+    @vcr.use_cassette('update_customer_name.yaml',
+                      cassette_library_dir=tests.fixtures_path,
+                      record_mode='once')
+    def test_update_customer_name(self):
+        customer_info = {
+            'name': '123333-updated',
+            'country': 'US',
+            'postal_code': '79762'
+        }
+        customer_id = 10
+        updated_customer = customers.update_customer(tests.CONNECTION, customer_id, customer_info)
+        self.assertIsInstance(updated_customer, dict)
