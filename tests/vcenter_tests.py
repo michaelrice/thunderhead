@@ -14,6 +14,8 @@
 
 import vcr
 
+from thunderhead.connection import Connection
+
 import tests
 from thunderhead.builder import vcenter
 
@@ -26,6 +28,14 @@ class VcenterTests(tests.VCRBasedTests):
     def test_get_all_vcenters_not_found(self):
         with self.assertRaises(vcenter.VCenterException):
             vcenter.get_all_vcenters(tests.CONNECTION)
+
+    @vcr.use_cassette('get_all_vcenters_no_route_to_host.yaml',
+                      cassette_library_dir=tests.fixtures_path,
+                      record_mode='once')
+    def test_get_all_vcenters_no_route_to_host(self):
+        bad_connection = Connection(host="null", token="bad")
+        with self.assertRaises(vcenter.VCenterException):
+            vcenter.get_all_vcenters(bad_connection)
 
     @vcr.use_cassette('get_all_vcenters.yaml',
                       cassette_library_dir=tests.fixtures_path,
