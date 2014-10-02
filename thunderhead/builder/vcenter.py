@@ -48,8 +48,8 @@ def get_all_vcenters(connection):
     verify_ssl = connection.verify_ssl
     try:
         res = requests.get(url=url, headers=extra_headers, verify=verify_ssl)
-    except Exception as e:
-        raise VCenterException("Connection error: {0}".format(e.message))
+    except Exception:
+        raise VCenterException("Connection error occurred.")
     if res.status_code > 210:
         raise VCenterException("Unable to fetch all vCenters: {0} => {1}".
                                format(res.status_code, res.content))
