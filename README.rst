@@ -12,10 +12,9 @@ Check back soon for more documentation
 
 Installing
 ==========
-Until I get this a little more finished off and submit it to pypi its best to use the setup
-file manually like this:
+thunderhead is available at pypi which allows for a simple install using pip:
 
-    python setup.py install
+    pip install thunderhead
 
 
 Testing
@@ -43,6 +42,12 @@ Compatibility Policy
 * thunderhead 0.1 and later are compatible with 3.3.x versions of vCloud Usage Meter
 
 
+Reporting Issues
+================
+To report a problem with thunderhead or to make a feature request open an `issue <https://github.com/michaelrice/thunderhead/issues>`_
+on Github.
+
+
 Releases
 ========
-* None yet
+* 0.1 -- Released October 3rd 2014 `download <https://pypi.python.org/pypi/thunderhead/0.1>`_
