@@ -61,6 +61,31 @@ class CustomerTests(tests.VCRBasedTests):
         customer_info['country'] = 'United States'
         self.assertDictContainsSubset(customer_info, new_customer)
 
+    # Test create new customer
+    @vcr.use_cassette('create_new_customer_using_country_name.yaml',
+                      cassette_library_dir=tests.fixtures_path,
+                      record_mode='once')
+    def test_create_new_customer_using_country_name(self):
+        customer_info = {
+            'name': '15551212111',
+            'country': 'United States',
+            'postal_code': '79762'
+        }
+        with self.assertRaises(customers.InvalidCountryCodeException):
+            customers.create_customer(tests.CONNECTION, customer_info)
+
+    # Test create new customer
+    @vcr.use_cassette('create_new_customer_no_country_code.yaml',
+                      cassette_library_dir=tests.fixtures_path,
+                      record_mode='once')
+    def test_create_new_customer_no_country_code(self):
+        customer_info = {
+            'name': '15551212',
+            'postal_code': 'Unknown'
+        }
+        with self.assertRaises(customers.MissingProperty):
+            customers.create_customer(tests.CONNECTION, customer_info)
+
     # Test Create new customer but duplicate found in system.
     @vcr.use_cassette('create_new_customer_duplicate_bad_request.yaml',
                       cassette_library_dir=tests.fixtures_path,
@@ -91,3 +116,16 @@ class CustomerTests(tests.VCRBasedTests):
     def no_test_get_customer_rules(self):
         rules = customers.get_customer_rules(tests.CONNECTION, 2)
         self.assertEquals(rules, list)
+
+    @vcr.use_cassette('update_customer_name.yaml',
+                      cassette_library_dir=tests.fixtures_path,
+                      record_mode='once')
+    def test_update_customer_name(self):
+        customer_info = {
+            'name': '123333-updated',
+            'country': 'US',
+            'postal_code': '79762'
+        }
+        customer_id = 10
+        updated_customer = customers.update_customer(tests.CONNECTION, customer_id, customer_info)
+        self.assertIsInstance(updated_customer, dict)

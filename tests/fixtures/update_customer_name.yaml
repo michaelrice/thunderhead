@@ -1,0 +1,29 @@
+interactions:
+- request:
+    body: <customer xmlns="http://www.vmware.com/UM"><name>123333-updated</name><country>US</country><postalCode>79762</postalCode></customer>
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      Content-Length: ['132']
+      Content-Type: [text/xml]
+      User-Agent: [python-requests/2.4.1 CPython/2.7.8 Darwin/13.4.0]
+      x-usagemeter-authorization: [TOKSDVLMROYMFIYEDBLHXDHLPIV5IDYGHM2]
+    method: PUT
+    uri: https://vusagemeter:8443/um/api/customer/10
+  response:
+    body: {string: !!python/unicode "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<customer>\n
+        \   <id>10</id>\n    <name>123333-updated</name>\n    <country>United States</country>\n
+        \   <postalCode>79762</postalCode>\n    </customer>  \n  "}
+    headers:
+      cache-control: ['no-cache, private, no-store']
+      content-length: ['190']
+      content-type: [text/xml;charset=utf-8]
+      date: ['Sun, 28 Sep 2014 05:45:50 GMT']
+      expires: ['Sun, 28 Sep 2014 05:34:37 GMT']
+      pragma: [no-cache]
+      server: [Apache-Coyote/1.1]
+      set-cookie: [JSESSIONID=40E4D196D1339196F8BDE182E8A2829D; Path=/um/; Secure]
+      x-lift-version: ['2.5']
+    status: {code: 200, message: OK}
+version: 1

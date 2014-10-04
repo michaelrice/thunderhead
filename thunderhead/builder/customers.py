@@ -82,6 +82,13 @@ def _build_customer_payload(customer):
         <postalCode>90210</postalCode>
     </customer>
     """
+    if not 'country' in customer:
+        raise MissingProperty("Missing required 'country'.")
+    if not 'name' in customer:
+        raise MissingProperty("Missing required 'name'")
+    if not 'postal_code' in customer:
+        raise MissingProperty("Missing required 'postal_code'")
+
     attribs = {
         'xmlns': 'http://www.vmware.com/UM'
     }
@@ -123,6 +130,8 @@ def create_customer(connection, customer):
                         verify=verify_ssl)
     if res.status_code == 400 and res.content == b'The Customer name must be unique.':
         raise DuplicateCustomerException(res.content)
+    elif res.status_code == 400 and b'not a valid country code' in res.content:
+        raise InvalidCountryCodeException(res.content)
     elif res.status_code == 201:
         return customers.parse_customer(res.content)
     else:
@@ -137,10 +146,25 @@ def update_customer(connection, customer_id, customer):
     :param customer:
     :return:
     """
-    #TODO implement me!
     connection.command_path = "customer/{0}".format(customer_id)
-    req_type = 'PUT'
-    pass
+    extra_headers = {
+        connection.header_key: connection.token,
+        'Content-Type': 'text/xml'
+    }
+    url = connection.build_url()
+    verify_ssl = connection.verify_ssl
+    customer_data = _build_customer_payload(customer)
+    res = requests.put(url, headers=extra_headers,
+                       data=customer_data,
+                       verify=verify_ssl)
+    if res.status_code == 400 and res.content == b'The Customer name must be unique.':
+        raise DuplicateCustomerException(res.content)
+    elif res.status_code == 400 and b'not a valid country code' in res.content:
+        raise InvalidCountryCodeException(res.content)
+    elif res.status_code == 200:
+        return customers.parse_customer(res.content)
+    else:
+        raise UnExpectedCustomerException(res.content)
 
 
 def delete_customer(connection, customer_id):
@@ -174,3 +198,12 @@ class UnExpectedCustomerException(Exception):
 
 class CustomerDeletionException(Exception):
     pass
+
+
+class MissingProperty(Exception):
+    pass
+
+
+class InvalidCountryCodeException(Exception):
+    pass
+
