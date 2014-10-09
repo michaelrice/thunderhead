@@ -31,7 +31,7 @@ setup(
     version='0.2',
     description='Python sdk to interface with vCloud Usage Meter',
     long_description=read('README.rst'),
-    packages=['thunderhead'],
+    packages=['thunderhead', 'thunderhead.builder', 'thunderhead.parser'],
     url='https://github.com/michaelrice/thunderhead',
     install_requires=required,
     license='License :: OSI Approved :: Apache Software License',
