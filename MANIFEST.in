@@ -1,0 +1,5 @@
+include README.*
+include *.txt
+include setup.py
+recursive-include tests *
+recursive-include docs *

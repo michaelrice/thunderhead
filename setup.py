@@ -28,7 +28,7 @@ with open('test-requirements.txt') as f:
 
 setup(
     name='thunderhead',
-    version='0.1',
+    version='0.2',
     description='Python sdk to interface with vCloud Usage Meter',
     long_description=read('README.rst'),
     packages=['thunderhead'],

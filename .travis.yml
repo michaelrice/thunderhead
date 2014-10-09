@@ -12,6 +12,7 @@ before_install:
     - pip install -r test-requirements.txt
 
 install:
-    - python setup.py install
+    - python setup.py bdist_egg
+    - pip install -e file://$TRAVIS_BUILD_DIR
 
 script: python setup.py test
