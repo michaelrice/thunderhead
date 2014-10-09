@@ -51,3 +51,4 @@ on Github.
 Releases
 ========
 * 0.1 -- Released October 3rd 2014 `download <https://pypi.python.org/pypi/thunderhead/0.1>`_
+* 0.2 -- Released October 9th 2014 `download <https://pypi.python.org/pypi/thunderhead/0.2>`_
