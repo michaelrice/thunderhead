@@ -11,3 +11,22 @@
 #   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 #   See the License for the specific language governing permissions and
 #   limitations under the License.
+
+from xml.etree import ElementTree as etree
+
+def parse_all_vcd(body):
+    """
+    Parse the response from a GET /api/getAllVcd
+    This will return a list of dict where the dict
+    is a representation of the vcd.
+
+    :param body:
+    :return:
+    """
+    if body is None:
+        return None
+    pass
+
+
+def parse_vcd(body):
+    pass
