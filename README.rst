@@ -59,5 +59,5 @@ Releases
 * 0.2
     Released October 9th 2014 `0.2 <https://pypi.python.org/pypi/thunderhead/0.2>`_
 * 0.4
-    Released October 9th 2014 `0.3 <https://pypi.python.org/pypi/thunderhead/0.4>`_
+    Released October 9th 2014 `0.4 <https://pypi.python.org/pypi/thunderhead/0.4>`_
 
