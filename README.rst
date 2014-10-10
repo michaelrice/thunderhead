@@ -2,6 +2,10 @@
     :target: https://travis-ci.org/michaelrice/thunderhead
     :alt: Build Status
 
+.. image:: https://pypip.in/download/thunderhead/badge.png
+    :target: https://pypi.python.org/pypi/thunderhead/
+    :alt: Downloads
+
 thunderhead is the Python SDK for the vCloud Usage Meter API that allows you to
 manage your vCloud Usage Meter system.
 
@@ -44,13 +48,16 @@ Compatibility Policy
 
 Reporting Issues
 ================
-To report a problem with thunderhead or to make a feature request open an `issue <https://github.com/michaelrice/thunderhead/issues>`_
-on Github.
+To report a problem with thunderhead or to make a feature request open an 
+`issue <https://github.com/michaelrice/thunderhead/issues>`_ on Github.
 
 
 Releases
 ========
-* 0.1 -- Released October 3rd 2014 `download <https://pypi.python.org/pypi/thunderhead/0.1>`_
-* 0.2 -- Released October 9th 2014 `download <https://pypi.python.org/pypi/thunderhead/0.2>`_
-* 0.4 -- Released October 9th 2014 `download <https://pypi.python.org/pypi/thunderhead/0.4>`_
+* 0.1
+    Released October 3rd 2014 `download <https://pypi.python.org/pypi/thunderhead/0.1>`_
+* 0.2
+    Released October 9th 2014 `download <https://pypi.python.org/pypi/thunderhead/0.2>`_
+* 0.4
+    Released October 9th 2014 `download <https://pypi.python.org/pypi/thunderhead/0.4>`_
 
