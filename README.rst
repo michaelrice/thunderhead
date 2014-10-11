@@ -1,4 +1,4 @@
-.. image:: https://travis-ci.org/michaelrice/thunderhead.svg
+.. image:: https://travis-ci.org/michaelrice/thunderhead.svg?branch=development
     :target: https://travis-ci.org/michaelrice/thunderhead
     :alt: Build Status
 
