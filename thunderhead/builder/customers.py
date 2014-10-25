@@ -1,3 +1,4 @@
+# coding=utf-8
 # Copyright 2014 Michael Rice <michael@michaelrice.org>
 #
 #   Licensed under the Apache License, Version 2.0 (the "License");
@@ -11,6 +12,8 @@
 #   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 #   See the License for the specific language governing permissions and
 #   limitations under the License.
+
+from __future__ import unicode_literals
 
 from xml.etree.ElementTree import Element
 from xml.etree.ElementTree import SubElement
@@ -81,6 +84,15 @@ def _build_customer_payload(customer):
         <country>US</country>
         <postalCode>90210</postalCode>
     </customer>
+
+    >>> foo = "¿Cómo"
+    >>> attribs = { 'xmlns': 'http://www.vmware.com/UM' }
+    >>> root = Element('vcServer', attribs)
+    >>> host = SubElement(root, 'hostname')
+    >>> host.text = foo.decode(encoding='utf8')
+    >>> tostring(root)
+        '<vcServer xmlns="http://www.vmware.com/UM"><hostname>&#191;C&#243;mo</hostname></vcServer>'
+
     """
     if not 'country' in customer:
         raise MissingProperty("Missing required 'country'.")
@@ -94,11 +106,11 @@ def _build_customer_payload(customer):
     }
     root = Element('customer', attribs)
     name = SubElement(root, 'name')
-    name.text = str(customer['name'])
+    name.text = customer['name']
     country = SubElement(root, 'country')
     country.text = customer['country']
     postal = SubElement(root, 'postalCode')
-    postal.text = str(customer['postal_code'])
+    postal.text = customer['postal_code']
     return tostring(root)
 
 

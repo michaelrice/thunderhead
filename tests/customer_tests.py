@@ -1,5 +1,5 @@
+# -*- coding: utf-8 -*-
 # Copyright 2014 Michael Rice <michael@michaelrice.org>
-#
 #   Licensed under the Apache License, Version 2.0 (the "License");
 #   you may not use this file except in compliance with the License.
 #   You may obtain a copy of the License at
@@ -11,6 +11,8 @@
 #   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 #   See the License for the specific language governing permissions and
 #   limitations under the License.
+
+from __future__ import unicode_literals
 
 import vcr
 
@@ -129,3 +131,13 @@ class CustomerTests(tests.VCRBasedTests):
         customer_id = 10
         updated_customer = customers.update_customer(tests.CONNECTION, customer_id, customer_info)
         self.assertIsInstance(updated_customer, dict)
+
+    def test_customer_builder(self):
+        customer = {
+            'country': 'US',
+            'name': '¿Cómo',
+            'postal_code': '78555'
+        }
+        xml = customers._build_customer_payload(customer)
+        res = b'<customer xmlns="http://www.vmware.com/UM"><name>&#191;C&#243;mo</name><country>US</country><postalCode>78555</postalCode></customer>'
+        self.assertEqual(xml, res)
