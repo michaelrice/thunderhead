@@ -18,7 +18,8 @@ from setuptools import setup
 
 
 def read(fname):
-    return open(os.path.join(os.path.dirname(__file__), fname)).read()
+    with open(os.path.join(os.path.dirname(__file__), fname)) as fn:
+        return fn.read()
 
 with open('requirements.txt') as f:
     required = f.read().splitlines()
@@ -28,7 +29,7 @@ with open('test-requirements.txt') as f:
 
 setup(
     name='thunderhead',
-    version='0.4',
+    version='0.4.1',
     description='Python sdk to interface with vCloud Usage Meter',
     long_description=read('README.rst'),
     packages=['thunderhead', 'thunderhead.builder', 'thunderhead.parser'],

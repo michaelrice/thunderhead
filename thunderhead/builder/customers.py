@@ -1,3 +1,4 @@
+# coding=utf-8
 # Copyright 2014 Michael Rice <michael@michaelrice.org>
 #
 #   Licensed under the Apache License, Version 2.0 (the "License");
@@ -11,6 +12,8 @@
 #   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 #   See the License for the specific language governing permissions and
 #   limitations under the License.
+
+from __future__ import unicode_literals
 
 from xml.etree.ElementTree import Element
 from xml.etree.ElementTree import SubElement
@@ -94,11 +97,11 @@ def _build_customer_payload(customer):
     }
     root = Element('customer', attribs)
     name = SubElement(root, 'name')
-    name.text = str(customer['name'])
+    name.text = customer['name']
     country = SubElement(root, 'country')
     country.text = customer['country']
     postal = SubElement(root, 'postalCode')
-    postal.text = str(customer['postal_code'])
+    postal.text = customer['postal_code']
     return tostring(root)
 
 
