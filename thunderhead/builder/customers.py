@@ -84,15 +84,6 @@ def _build_customer_payload(customer):
         <country>US</country>
         <postalCode>90210</postalCode>
     </customer>
-
-    >>> foo = "¿Cómo"
-    >>> attribs = { 'xmlns': 'http://www.vmware.com/UM' }
-    >>> root = Element('vcServer', attribs)
-    >>> host = SubElement(root, 'hostname')
-    >>> host.text = foo.decode(encoding='utf8')
-    >>> tostring(root)
-        '<vcServer xmlns="http://www.vmware.com/UM"><hostname>&#191;C&#243;mo</hostname></vcServer>'
-
     """
     if not 'country' in customer:
         raise MissingProperty("Missing required 'country'.")

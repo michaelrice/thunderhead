@@ -1,4 +1,4 @@
-.. image:: https://travis-ci.org/michaelrice/thunderhead.svg?branch=development
+.. image:: https://travis-ci.org/michaelrice/thunderhead.svg?branch=master
     :target: https://travis-ci.org/michaelrice/thunderhead
     :alt: Build Status
 
@@ -56,4 +56,7 @@ Releases
 ========
 * 0.4
     Released October 9th 2014 `0.4 <https://pypi.python.org/pypi/thunderhead/0.4>`_
+
+* 0.4.1
+    Released October 25th 2014 `0.4.1 <https://pypi.python.org/pypi/thunderhead/0.4.1>`_
 
