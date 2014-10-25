@@ -54,10 +54,6 @@ To report a problem with thunderhead or to make a feature request open an
 
 Releases
 ========
-* 0.1
-    Released October 3rd 2014 `0.1 <https://pypi.python.org/pypi/thunderhead/0.1>`_
-* 0.2
-    Released October 9th 2014 `0.2 <https://pypi.python.org/pypi/thunderhead/0.2>`_
 * 0.4
     Released October 9th 2014 `0.4 <https://pypi.python.org/pypi/thunderhead/0.4>`_
 
