@@ -15,3 +15,11 @@
 
 class MissingProperty(BaseException):
     pass
+
+
+class VCloudDirectorException(BaseException):
+    pass
+
+
+class VcdNotFoundException(BaseException):
+    pass

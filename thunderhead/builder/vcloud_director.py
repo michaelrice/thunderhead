@@ -17,6 +17,7 @@ from xml.etree.ElementTree import SubElement
 from xml.etree.ElementTree import tostring
 
 import requests
+from thunderhead.exceptions import VCloudDirectorException
 
 from thunderhead.parser import vcloud_director
 
@@ -97,11 +98,3 @@ def create_vcd_server(connection, vcd_object):
             res.status_code, res.content
         ))
     return vcloud_director.parse_vcd(res.content)
-
-
-class VCloudDirectorException(Exception):
-    pass
-
-
-class VcdNotFoundException(Exception):
-    pass

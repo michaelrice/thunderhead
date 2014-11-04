@@ -1,4 +1,4 @@
-# Copyright 2014 Zaheena Kashif
+# Copyright 2014 Zaheena Kashif, Michael Rice
 #
 #   Licensed under the Apache License, Version 2.0 (the "License");
 #   you may not use this file except in compliance with the License.
@@ -14,41 +14,20 @@
 
 import vcr
 
-from thunderhead.connection import Connection
-
 import tests
 from thunderhead.builder import vcloud_director
 
 
 class VcloudDirectorTests(tests.VCRBasedTests):
 
-    @vcr.use_cassette('get_all_vcd_not_found.yaml',
+    @vcr.use_cassette('create_vcd_success.yaml',
                       cassette_library_dir=tests.fixtures_path,
                       record_mode='once')
-    def test_get_all_vcd(self):
-        with self.assertRaises(vcloud_director.VcdNotFoundException):
-            vcloud_director.get_all_vcd(tests.CONNECTION)
-
-    @vcr.use_cassette('create_vcd_fail.yaml',
-                      cassette_library_dir=tests.fixtures_path,
-                      record_mode='once')
-    def test_create_vcd_fail(self):
+    def test_create_vcd_success(self):
         vcd_info = {
-            'hostname': '172.16.214.131',
-            'username': 'root',
-            'password': 'vmware'
-        }
-        vcd = vcloud_director.create_vcd_server(tests.CONNECTION, vcd_info)
-        self.assertIsInstance(vcd, dict)
-
-    @vcr.use_cassette('create_vcd.yaml',
-                      cassette_library_dir=tests.fixtures_path,
-                      record_mode='once')
-    def test_create_vcd(self):
-        vcd_info = {
-            'hostname': '',
-            'username': '',
-            'password': ''
+            'hostname': '10.12.254.111',
+            'username': 'administrator',
+            'password': 'password'
         }
         vcd = vcloud_director.create_vcd_server(tests.CONNECTION, vcd_info)
         self.assertIsInstance(vcd, dict)

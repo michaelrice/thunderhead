@@ -14,6 +14,7 @@
 
 from xml.etree import ElementTree as etree
 
+
 def parse_all_vcd(body):
     """
     Parse the response from a GET /api/getAllVcd
@@ -29,4 +30,14 @@ def parse_all_vcd(body):
 
 
 def parse_vcd(body):
-    pass
+    vcd = etree.fromstring(body)
+    return _parse_vcd(vcd)
+
+
+def _parse_vcd(vcloud):
+    ret = {}
+    for vcd_info in vcloud.getchildren():
+        tag = vcd_info.tag.split("}")[1][0:]
+        text = vcd_info.text
+        ret[tag] = text
+    return ret
