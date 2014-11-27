@@ -13,6 +13,7 @@
 #   limitations under the License.
 
 from xml.etree import ElementTree as etree
+from thunderhead.parser.generic_parser import PayloadParser
 
 
 def parse_all_rules(body):
@@ -36,10 +37,5 @@ def parse_rule(body):
 
 
 def _parse_rule(rule):
-    v = {}
-    for rule_info in rule.getchildren():
-        # this is messy but it seems cleaner than dealing with the namespace
-        tag = rule_info.tag.split("}")[1][0:]
-        text = rule_info.text
-        v[tag] = text
-    return v
+    rule_parser = PayloadParser()
+    return rule_parser.parse(rule)

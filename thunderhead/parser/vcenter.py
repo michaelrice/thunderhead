@@ -14,6 +14,8 @@
 
 from xml.etree import ElementTree as etree
 
+from thunderhead.parser.generic_parser import PayloadParser
+
 
 def parse_all_vcenters(body):
     """
@@ -76,10 +78,5 @@ def parse_vcenter(body):
 
 
 def _parse_vcenter(vcenter):
-    v = {}
-    for vcenter_info in vcenter.getchildren():
-        # this is messy but it seems cleaner than dealing with the namespace
-        tag = vcenter_info.tag.split("}")[1][0:]
-        text = vcenter_info.text
-        v[tag] = text
-    return v
+    vcenter_parser = PayloadParser()
+    return vcenter_parser.parse(vcenter)

@@ -47,13 +47,18 @@ class VcenterTests(tests.VCRBasedTests):
         d1 = {
             'username': 'root',
             'instanceUuid': '137E2125-73EB-4E1B-BF03-2B6CD396E6AC',
-            'monitor': 'false',
+            'vcServerId': '1',
+            'valueType': 'Unique ID',
             'hostname': '172.16.214.129',
-            'meter': 'true',
+            'monitor': 'false',
+            'value': 'datacenter-2',
+            'id': '1',
             'version': '5.5.0',
+            'meter': 'true',
             'active': 'true',
             'fullname': 'VMware vCenter Server 5.5.0 build-1945287 (Sim)',
-            'id': '1'
+            'customerId': '3',
+            'objectType': 'Data Center'
         }
         self.assertDictEqual(d1, vcenters[0])
 
@@ -65,13 +70,18 @@ class VcenterTests(tests.VCRBasedTests):
         d1 = {
             'username': 'root',
             'instanceUuid': '137E2125-73EB-4E1B-BF03-2B6CD396E6AC',
-            'monitor': 'false',
+            'vcServerId': '1',
+            'valueType': 'Unique ID',
             'hostname': '172.16.214.129',
-            'meter': 'true',
+            'monitor': 'false',
+            'value': 'datacenter-2',
+            'id': '1',
             'version': '5.5.0',
+            'meter': 'true',
             'active': 'true',
             'fullname': 'VMware vCenter Server 5.5.0 build-1945287 (Sim)',
-            'id': '1'
+            'customerId': '3',
+            'objectType': 'Data Center'
         }
         self.assertIsNotNone(vc)
         self.assertIsInstance(vc, dict)
