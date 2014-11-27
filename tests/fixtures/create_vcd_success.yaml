@@ -1,0 +1,31 @@
+interactions:
+- request:
+    body: <vcServer xmlns="http://www.vmware.com/UM"><hostname>10.12.254.111</hostname><username>administrator</username><password>password</password></vcServer>
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      Content-Length: ['151']
+      Content-Type: [text/xml]
+      User-Agent: [python-requests/2.4.1 CPython/2.7.8 Darwin/13.4.0]
+      x-usagemeter-authorization: [TOKSDVLMROYMFIYEDBLHXDHLPIV5IDYGHM2]
+    method: POST
+    uri: https://vusagemeter:8443/um/api/vcd
+  response:
+    body: {string: !!python/unicode "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<vcdServer
+        xmlns=\"http://www.vmware.com/UM\" xmlns:tns=\"http://www.vmware.com/UM\"
+        xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"><id>2</id><hostname>10.12.254.111</hostname><port>443</port><username>administrator</username><active>true</active><version>5.5</version></vcdServer>
+        \ \n  "}
+    headers:
+      cache-control: ['no-cache, private, no-store']
+      content-length: ['372']
+      content-type: [text/xml;charset=utf-8]
+      date: ['Tue, 04 Nov 2014 04:10:48 GMT']
+      expires: ['Tue, 4 Nov 2014 03:20:19 GMT']
+      location: [/um/api/products/vcdServers/0]
+      pragma: [no-cache]
+      server: [Apache-Coyote/1.1]
+      set-cookie: [JSESSIONID=E2EEDC00A7D65C3532882CE142E7FE15; Path=/um/; Secure]
+      x-lift-version: ['2.5']
+    status: {code: 201, message: Created}
+version: 1

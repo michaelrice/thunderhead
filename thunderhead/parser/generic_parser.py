@@ -13,13 +13,24 @@
 #   limitations under the License.
 
 
-class MissingProperty(BaseException):
-    pass
+class PayloadParser(object):
+    """
+    Payload parsing class.
+    """
+    ret = {}
 
+    def __init__(self):
+        pass
 
-class VCloudDirectorException(BaseException):
-    pass
+    def parse(self, payload):
+        """
+        Method to parse the response payloads from a vCloud Usage Meter response.
 
-
-class VcdNotFoundException(BaseException):
-    pass
+        :param payload:
+        :return:
+        """
+        for info in payload.getchildren():
+            tag = info.tag.split("}")[1][0:]
+            text = info.text
+            self.ret[tag] = text
+        return self.ret
