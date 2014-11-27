@@ -12,29 +12,25 @@
 #   See the License for the specific language governing permissions and
 #   limitations under the License.
 
-from xml.etree import ElementTree as etree
-from thunderhead.parser.generic_parser import PayloadParser
 
-
-def parse_all_vcd(body):
+class PayloadParser(object):
     """
-    Parse the response from a GET /api/getAllVcd
-    This will return a list of dict where the dict
-    is a representation of the vcd.
-
-    :param body:
-    :return:
+    Payload parsing class.
     """
-    if body is None:
-        return None
-    pass
+    ret = {}
 
+    def __init__(self):
+        pass
 
-def parse_vcd(body):
-    vcd = etree.fromstring(body)
-    return _parse_vcd(vcd)
+    def parse(self, payload):
+        """
+        Method to parse the response payloads from a vCloud Usage Meter response.
 
-
-def _parse_vcd(vcloud):
-    vcd_parser = PayloadParser()
-    return vcd_parser.parse(vcloud)
+        :param payload:
+        :return:
+        """
+        for info in payload.getchildren():
+            tag = info.tag.split("}")[1][0:]
+            text = info.text
+            self.ret[tag] = text
+        return self.ret

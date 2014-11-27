@@ -29,6 +29,7 @@ def get_all_vcd(connection):
     :param connection:
     :return:
     """
+    raise NotImplementedError
     connection.command_path = "getAllVcd"
     extra_headers = {connection.header_key: connection.token}
     url = connection.build_url()
