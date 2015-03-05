@@ -38,7 +38,8 @@ def get_report(connection, report_id, date_from, date_to):
         'dateTo': date_to
     }
     url = connection.build_url()
-    res = requests.get(url, headers=extra_headers, params=query_params)
+    verify_ssl = connection.verify_ssl
+    res = requests.get(url, headers=extra_headers, params=query_params, verify=verify_ssl)
     if res.status_code == 200:
         return res.content
     raise ReportException("Error fetching report: {0} => {1}".format(
