@@ -33,6 +33,10 @@ class RuleCreationException(Exception):
     pass
 
 
+class RuleCreationDuplicateRule(Exception):
+    pass
+
+
 def get_all_rules(connection):
     """
     Get All Rules from vCloud Usage Meter
@@ -97,6 +101,10 @@ def create_rule(connection, rule_info):
                         verify=verify_ssl)
     if res.status_code == 201:
         return rules.parse_rule(res.content)
+
+    if res.status_code == 403 and "Rule already exists" in res.text:
+        raise RuleCreationDuplicateRule("Rule already exists")
+
     raise RuleCreationException("Error creating rule: {0} => {0}".format(
         res.status_code, res.content
     ))
