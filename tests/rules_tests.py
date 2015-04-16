@@ -106,3 +106,17 @@ class RulesTest(tests.ThunderheadTests):
         }
         rule = rules.create_rule(tests.CONNECTION, rule_info)
         self.assertIsNotNone(rule)
+
+    @vcr.use_cassette('create_duplicate_rule.yaml',
+                      cassette_library_dir=tests.fixtures_path,
+                      record_mode='once')
+    def test_create_duplicate_rule(self):
+        rule_info = {
+            'vcServerHost': '172.16.214.129',
+            'customerName': '1018700',
+            'objectType': 'Data Center',
+            'valueType': 'Unique ID',
+            'value': 'datacenter-104'
+        }
+        with self.assertRaises(rules.RuleCreationDuplicateRule):
+            rules.create_rule(tests.CONNECTION, rule_info)

@@ -1,0 +1,28 @@
+interactions:
+- request:
+    body: <rule xmlns="http://www.vmware.com/UM"><vcServerHost>172.16.214.129</vcServerHost><customerName>1018700</customerName><objectType>Data
+      Center</objectType><valueType>Unique ID</valueType><value>datacenter-104</value></rule>
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      Content-Length: ['222']
+      Content-Type: [text/xml]
+      User-Agent: [python-requests/2.4.1 CPython/2.7.8 Darwin/13.4.0]
+      x-usagemeter-authorization: [TOKSDVLMROYMFIYEDBLHXDHLPIV5IDYGHM2]
+    method: POST
+    uri: https://vusagemeter:8443/um/api/rule
+  response:
+    body: {string: !!python/unicode Rule already exists}
+    headers:
+      cache-control: ['no-cache, private, no-store']
+      content-length: ['19']
+      content-type: [text/plain;charset=utf-8]
+      date: ['Thu, 16 Apr 2015 15:05:07 GMT']
+      expires: ['Thu, 16 Apr 2015 14:51:31 GMT']
+      pragma: [no-cache]
+      server: [Apache-Coyote/1.1]
+      set-cookie: [JSESSIONID=1BB2B949F11DBD6D1E887403C2B4E7CE; Path=/um/; Secure]
+      x-lift-version: ['2.5']
+    status: {code: 403, message: Forbidden}
+version: 1
