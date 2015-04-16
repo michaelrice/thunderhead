@@ -60,3 +60,10 @@ Releases
 * 0.4.1
     Released October 25th 2014 `0.4.1 <https://pypi.python.org/pypi/thunderhead/0.4.1>`_
 
+* 0.4.2
+    Released March 5th 2015 `0.4.2 <https://pypi.python.org/pypi/thunderhead/0.4.2>`_
+
+* 0.4.3
+    Released April 16th 2015 `0.4.3 <https://pypi.python.org/pypi/thunderhead/0.4.3>`_
+
+
