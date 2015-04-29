@@ -6,6 +6,10 @@
     :target: https://pypi.python.org/pypi/thunderhead/
     :alt: Downloads
 
+.. image:: https://landscape.io/github/michaelrice/thunderhead/development/landscape.svg?style=flat
+   :target: https://landscape.io/github/michaelrice/thunderhead/development
+      :alt: Code Health
+
 thunderhead is the Python SDK for the VMware vCloud Usage Meter API that allows you to
 manage your vCloud Usage Meter system.
 
