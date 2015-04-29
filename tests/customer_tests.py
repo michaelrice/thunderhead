@@ -141,3 +141,14 @@ class CustomerTests(tests.VCRBasedTests):
         xml = customers._build_customer_payload(customer)
         res = b'<customer xmlns="http://www.vmware.com/UM"><name>&#191;C&#243;mo</name><country>US</country><postalCode>78555</postalCode></customer>'
         self.assertEqual(xml, res)
+
+    def test_customer_create_with_umlaut(self):
+        customer = {
+            'country': 'CH',
+            'moref': 'datacenter-5551212',
+            'postal_code': 'CH-8058 Z\xc3\x9cRICH-BLAH',
+            'name': '8675309'
+        }
+        xml = customers._build_customer_payload(customer)
+        res = b'<customer xmlns="http://www.vmware.com/UM"><name>8675309</name><country>CH</country><postalCode>CH-8058 Z&#195;&#156;RICH-BLAH</postalCode></customer>'
+        self.assertEqual(xml, res)
